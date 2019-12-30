@@ -15,12 +15,13 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->tinyInteger('class_id');
+            $table->string('project_code', 20);
             $table->string('product_name', 100)->nullable();
             $table->string('description', 300)->nullable();
             $table->string('image_path', 150)->nullable();
             $table->string('production_time', 15)->nullable();
             $table->string('leader_name', 30)->nullable();
-            $table->tinyInteger('class_id');
             $table->string('team_name', 30)->nullable();
             $table->string('team_member', 120)->nullable();
             $table->unsignedSmallInteger('year');
