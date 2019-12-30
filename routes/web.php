@@ -14,3 +14,9 @@
 Route::get('/example', function () {
     return view('example');
 });
+
+Route::resource('projects', 'ProjectController');
+
+Route::resource('tokens', 'TokenController', ['except' => [
+    'edit'
+]]);
