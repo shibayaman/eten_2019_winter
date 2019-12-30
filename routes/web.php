@@ -15,6 +15,8 @@ Route::get('/example', function () {
     return view('example');
 });
 
+Route::view('/', 'login');
+
 Route::resource('projects', 'ProjectController');
 
 Route::resource('tokens', 'TokenController', ['except' => [

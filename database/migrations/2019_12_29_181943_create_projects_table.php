@@ -26,6 +26,7 @@ class CreateProjectsTable extends Migration
             $table->string('team_member', 120)->nullable();
             $table->unsignedSmallInteger('year');
             $table->unsignedTinyInteger('season_id');
+            $table->unique(['project_code', 'year', 'season_id']);
             $table->timestamps();
         });
     }

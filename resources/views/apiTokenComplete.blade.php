@@ -1,6 +1,6 @@
 @extends('layouts/app')
 
-{{-- @section('title') --}}
+@section('title', 'API発行完了')
 
 @section('cssFile')
 <link rel="stylesheet" href="{{ asset('css/example.css') }}">

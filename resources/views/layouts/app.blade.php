@@ -11,6 +11,6 @@
         <div class="section">
           @yield('content')
         </div>
-        {{-- <script src="{{ asset('js/example.js') }}"></script> --}}
+        @yield('scripts')
     </body>
 </html>

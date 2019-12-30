@@ -1,6 +1,6 @@
 @extends('layouts/app')
 
-@section('title', 'hello blade')
+@section('title', 'API発行')
 
 @section('cssFile')
 <link rel="stylesheet" href="{{ asset('css/example.css') }}">
@@ -10,7 +10,7 @@
 <form action="/tokens" method="post">
     @csrf
     <div class="field">
-        <label class="label">Name</label>
+        <label class="label">作品コード</label>
         <div class="control">
             <input class="input" type="text" name="project_code" placeholder="作品コード">
         </div>
