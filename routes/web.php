@@ -16,3 +16,7 @@ Route::get('/example', function () {
 });
 
 Route::resource('tokens', 'TokenController');
+
+Route::resource('projects', 'ProjectController');
+
+Route::view('/', 'login');
