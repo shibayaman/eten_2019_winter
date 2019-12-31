@@ -14,3 +14,5 @@
 Route::get('/example', function () {
     return view('example');
 });
+
+Route::resource('tokens', 'TokenController');
