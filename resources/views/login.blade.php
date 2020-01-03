@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+<h1 class="title">作品登録ログイン画面</h1>
+<a class="is-pulled-right" href="/login">管理者用ページへ</a>
 <form action="/projects/create" method="get">
     @csrf
     <div class="field">

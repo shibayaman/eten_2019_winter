@@ -20,3 +20,11 @@ Route::resource('tokens', 'TokenController');
 Route::resource('projects', 'ProjectController');
 
 Route::view('/', 'login');
+
+Auth::routes([
+    'register' => false,
+    'confirm' => false,
+    'reset' => false
+]);
+
+Route::view('/admin', 'admin')->middleware('auth');
