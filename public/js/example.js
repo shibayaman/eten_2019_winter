@@ -10726,15 +10726,27 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./resources/sass/registration.scss":
+/*!******************************************!*\
+  !*** ./resources/sass/registration.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*********************************************************************!*\
-  !*** multi ./resources/js/example.js ./resources/sass/example.scss ***!
-  \*********************************************************************/
+/*!********************************************************************************************************!*\
+  !*** multi ./resources/js/example.js ./resources/sass/registration.scss ./resources/sass/example.scss ***!
+  \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/shiba/Develop/ecc/eten_2019_winter/resources/js/example.js */"./resources/js/example.js");
-module.exports = __webpack_require__(/*! /Users/shiba/Develop/ecc/eten_2019_winter/resources/sass/example.scss */"./resources/sass/example.scss");
+__webpack_require__(/*! C:\Develop\E_ten\eten_2019_winter\resources\js\example.js */"./resources/js/example.js");
+__webpack_require__(/*! C:\Develop\E_ten\eten_2019_winter\resources\sass\registration.scss */"./resources/sass/registration.scss");
+module.exports = __webpack_require__(/*! C:\Develop\E_ten\eten_2019_winter\resources\sass\example.scss */"./resources/sass/example.scss");
 
 
 /***/ })

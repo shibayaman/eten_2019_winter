@@ -14,3 +14,7 @@
 Route::get('/example', function () {
     return view('example');
 });
+
+Route::get('/registration', function () {
+    return view('registration');
+});
