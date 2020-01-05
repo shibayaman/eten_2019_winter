@@ -9,25 +9,26 @@
 
     </head>
     <body>
+
       <form action="confirmation.blade.php" method="post">
         <div class="section">
             <label class="label">作品名</label>
             <div class="field">
                 <div class="control">
-                  <input class="input" type="text" placeholder="作品名を入力してください">
+                  <input class="input column is-half" type="text" placeholder="作品名を入力してください">
                 </div>
             </div>
 
             <label class="label">キャッチコピー</label>
               <div class="field">
                 <div class="control">
-                  <input class="input" type="text" placeholder="30字以内" maxlength="30">
+                  <input class="input column is-half" type="text" placeholder="30字以内" maxlength="30">
                 </div>
               </div>
 
             <label class="label">詳細</label>
               <div class="field">
-                <textarea class="textarea" placeholder="作品の詳細を書いてください" maxlength="300"></textarea>
+                <textarea class="textarea column is-two-thirds" placeholder="作品の詳細を書いてください" maxlength="300"></textarea>
               </div>
 
             <label class="label">画像</label>
@@ -69,7 +70,7 @@
             <label class="label">代表者名</label>
               <div class="field">
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input" type="text" placeholder="代表者の名前を入力してください">
+                  <input class="input column is-one-third" type="text" placeholder="代表者の名前を入力してください">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -79,14 +80,14 @@
             <label class="label">チーム名</label>
             <div class="field">
                 <div class="control">
-                  <input class="input" type="text" placeholder="チーム名を入力してください">
+                  <input class="input column is-one-third" type="text" placeholder="チーム名を入力してください">
                 </div>
             </div>
 
             <label class="label">メンバー</label>
             <div class="field">
               <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="メンバーの名前を入力してください">
+                <input class="input column is-one-third" type="text" placeholder="メンバーの名前を入力してください">
                 <span class="icon is-small is-left">
                   <i class="fas fa-user"></i>
                 </span>
