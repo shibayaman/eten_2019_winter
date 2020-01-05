@@ -10,6 +10,10 @@ use App\Token;
 
 class TokenController extends Controller
 {
+    public function __constructor() {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return "I'm hoping someone would implement me some time in the future...";
@@ -42,21 +46,21 @@ class TokenController extends Controller
 
     public function show($id)
     {
-        return "I hoping someone would implement me some time in the future...";
+        return "I'm hoping someone would implement me some time in the future...";
     }
 
     public function edit($id)
     {
-        return "I hoping someone would implement me some time in the future...";
+        return "I'm hoping someone would implement me some time in the future...";
     }
 
     public function update(Request $request, $id)
     {
-        return "I hoping someone would implement me some time in the future...";
+        return "I'm hoping someone would implement me some time in the future...";
     }
 
     public function destroy($id)
     {
-        return "I hoping someone would implement me some time in the future...";
+        return "I'm hoping someone would implement me some time in the future...";
     }
 }

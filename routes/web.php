@@ -15,9 +15,10 @@ Route::get('/example', function () {
     return view('example');
 });
 
-Route::resource('tokens', 'TokenController');
+Route::post('projects/create', 'ProjectController@create')->name('projects.create');
+Route::resource('projects', 'ProjectController')->except(['create']);
 
-Route::resource('projects', 'ProjectController');
+Route::resource('tokens', 'TokenController');
 
 Route::view('/', 'login');
 

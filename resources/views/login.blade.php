@@ -10,7 +10,7 @@
 @section('content')
 <h1 class="title">作品登録ログイン画面</h1>
 <a class="is-pulled-right" href="/login">管理者用ページへ</a>
-<form action="/projects/create" method="get">
+<form action="/projects/create" method="post">
     @csrf
     <div class="field">
         <label class="label">作品コード</label>
