@@ -18,7 +18,7 @@ class CreateTokensTable extends Migration
             $table->string('token', 64)->unique();
             $table->string('project_code', 20);
             $table->unsignedTinyInteger('season_id');
-            $table->string('department', 15);
+            $table->unsignedTinyInteger('class_id');
             $table->timestamp('expires_at');
             $table->unique(['project_code', 'season_id']);
             $table->timestamps();

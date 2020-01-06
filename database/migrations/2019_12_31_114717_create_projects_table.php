@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedTinyInteger('class_id');
             $table->string('project_code', 20);
             $table->string('product_name', 100);
+            $table->string('catchphrase', 50);
             $table->string('description', 300);
             $table->string('image_path', 150);
             $table->string('production_time', 15);
