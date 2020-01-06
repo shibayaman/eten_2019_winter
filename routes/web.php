@@ -14,3 +14,18 @@
 Route::get('/example', function () {
     return view('example');
 });
+
+Route::post('projects/create', 'ProjectController@create')->name('projects.create');
+Route::resource('projects', 'ProjectController')->except(['create']);
+
+Route::resource('tokens', 'TokenController');
+
+Route::view('/', 'login');
+
+Auth::routes([
+    'register' => false,
+    'confirm' => false,
+    'reset' => false
+]);
+
+Route::view('/admin', 'admin')->middleware('auth');
