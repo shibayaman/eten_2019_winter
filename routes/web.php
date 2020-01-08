@@ -15,6 +15,7 @@ Route::get('/example', function () {
     return view('example');
 });
 
+Route::get('projects/confirm','ProjectController@confirm')->name('projects.confirm');
 Route::post('projects/create', 'ProjectController@create')->name('projects.create');
 Route::resource('projects', 'ProjectController')->except(['create']);
 
