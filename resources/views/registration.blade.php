@@ -10,21 +10,24 @@
     </head>
     <body>
 
-
-      <div class="column is-three-fifths is-offset-5">
-          <h1 class="title">作品登録フォーム</h1>
-      </div>
-      <br>
-      <div class="columns">
-        <div class="column is-offset-3">
-          <label class="label is-large">作品コード : I05</label>
-        </div>
-        <div class="column">
-          <label class="label is-large">クラス名 : IE2A</label>
+      <div class="field">
+        <div class="column is-three-fifths is-offset-5">
+            <h1 class="title">作品登録フォーム</h1>
         </div>
       </div>
+      <div class="field">
+        <div class="columns">
+          <div class="column is-offset-3">
+            <label class="label is-large">作品コード : I05</label>
+          </div>
+          <div class="column">
+            <label class="label is-large">クラス名 : IE2A</label>
+          </div>
+        </div>
+      </div>
+      <hr>
 
-      <div id="attention-field"></div>
+      <div class="field" id="attention-field"></div>
 
       <form action="confirmation.blade.php" method="post">
         <div class="section">
