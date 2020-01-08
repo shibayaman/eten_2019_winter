@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     public function __construct() {
-        // $this->middleware('projectToken')->only([
-        //     'create', 'store'
-        // ]);
+        $this->middleware('projectToken')->only([
+            'create', 'store'
+        ]);
     }
 
     public function index()
@@ -23,8 +23,15 @@ class ProjectController extends Controller
     }
 
     public function confirm(Request $request){
-        
-        return view('confirm',compact('request'));
+        $project = $request->all();
+
+        if ($request->session()->exists('project')) {
+            $request->session()->forget('project');
+        }
+
+        $request->session()->put('project',$project);
+
+        return view('confirm',compact('project'));
     }
 
     public function store(Request $request)
