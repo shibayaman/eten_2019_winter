@@ -24,15 +24,9 @@ class ProjectController extends Controller
     }
 
     public function confirm(Request $request){
-        $project = $request->all();
-
-        if ($request->session()->exists('project')) {
-            $request->session()->forget('project');
-        }
-
-        $request->session()->put('project',$project);
-
-        return view('confirm',compact('project'));
+        $path = basename($request->file('image')->store('public/image'));
+        $project = $request->except('image');
+        return view('confirm',compact('project','path'));
     }
 
     public function store(Request $request)

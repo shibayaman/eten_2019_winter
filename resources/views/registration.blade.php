@@ -30,7 +30,7 @@
 
       <div class="field" id="attention-field"></div>
 
-      <form action="{{Route('projects.confirm')}}" method="post">
+      <form action="{{Route('projects.confirm')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="section">
 
@@ -54,7 +54,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <input class="input column is-two-thirds" type="text" id="catch_copy" placeholder="30字以内でキャッチコピーを書いてください" maxlength="30">
+                      <input class="input column is-two-thirds" type="text" id="catch_copy" name="catch_copy" placeholder="30字以内でキャッチコピーを書いてください" maxlength="30">
                     </div>
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <textarea class="textarea" placeholder="作品の詳細を書いてください" id="detail" maxlength="300" rows="5"></textarea>
+                      <textarea class="textarea" placeholder="作品の詳細を書いてください" id="detail" maxlength="300" rows="5" name="detail"></textarea>
                     </div>
                   </div>
                 </div>
