@@ -19,7 +19,8 @@ class ProjectController extends Controller
 
     public function create(Request $request)
     {
-        return $request->tokenData;
+        // return $request->tokenData;
+        return view('registration');
     }
 
     public function store(Request $request)
