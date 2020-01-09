@@ -6,21 +6,25 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
     }
   }
 
+  var count = 1;
+
   $('#add_member').on('click', function() {
-    console.log("aaa");
-    $('#memberinput').append('<div class="field is-horizontal">'
-                            + '<div class="field-label is-normal"></div>'
-                            + '<div class="field-body">'
-                            + '<div class="field">'
-                            + '<div class="control has-icons-left has-icons-right">'
-                            + '<input class="input column is-one-third" type="text" name="member[]" placeholder="代表者以外のメンバーの名前を入力してください">'
-                            + '<span class="icon is-small is-left">'
-                            + '<i class="fas fa-user"></i>'
-                            + '</span>'
-                            + '</div>'
-                            + '</div>'
-                            + '</div>'
-                            + '</div>');
+    if(count < 10){
+      $('#memberinput').append('<div class="field is-horizontal">'
+                              + '<div class="field-label is-normal"></div>'
+                              + '<div class="field-body">'
+                              + '<div class="field">'
+                              + '<div class="control has-icons-left has-icons-right">'
+                              + '<input class="input column is-one-third" type="text" name="member[]" placeholder="代表者以外のメンバーの名前を入力してください">'
+                              + '<span class="icon is-small is-left">'
+                              + '<i class="fas fa-user"></i>'
+                              + '</span>'
+                              + '</div>'
+                              + '</div>'
+                              + '</div>'
+                              + '</div>');
+      count++;
+    }
   });
 
   $("#title").on("blur", function(){
