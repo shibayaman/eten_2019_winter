@@ -17,7 +17,6 @@ class CreateSeasonsTable extends Migration
             $table->tinyIncrements('id');
             $table->unsignedInteger('year');
             $table->string('season',10);
-            $table->timestamps();
         });
     }
 
