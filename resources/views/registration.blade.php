@@ -1,25 +1,4 @@
 
-<?php
-    define("HOST", "localhost");
-    define("USR", "root");
-    define("PASS", "");
-    define("DB", "ec_espresso");
-
-    if(!$conn = mysqli_connect(HOST, USR, PASS, DB)){
-        die("データベースにアクセスできません");
-    }
-
-    mysqli_set_charset($conn, "utf8");
-    $sql = "SELECT * FROM inventory WHERE ORDER_CODE = '001'";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_store_result($stmt);
-    $num = mysqli_stmt_num_rows($stmt);
-    mysqli_stmt_bind_result($stmt, $itcd, $odcd, $name, $count, $date, $period, $rdate);
-    mysqli_stmt_fetch($stmt);
-
- ?>
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -40,10 +19,10 @@
       <div class="field">
         <div class="columns">
           <div class="column is-offset-3">
-            <label class="label is-large">作品コード : <?php print $itcd; ?></label>
+            <label class="label is-large">作品コード : ダミー</label>
           </div>
           <div class="column">
-            <label class="label is-large">クラス名 : <?php print $name; ?></label>
+            <label class="label is-large">クラス名 : ダミー</label>
           </div>
         </div>
       </div>
@@ -237,11 +216,6 @@
             </div>
         </div>
       </form>
-      <?php
-          mysqli_stmt_free_result($stmt);
-          mysqli_stmt_close($stmt);
-          mysqli_close($conn);
-       ?>
         <script src="{{ asset('js/registration.js') }}"></script>
     </body>
 </html>
