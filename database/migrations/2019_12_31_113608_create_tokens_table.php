@@ -20,7 +20,7 @@ class CreateTokensTable extends Migration
             $table->unsignedTinyInteger('season_id');
             $table->string('class_id',10);
             $table->timestamp('expires_at');
-            $table->unique(['project_code']);
+            $table->unique(['project_code', 'season_id']);
             $table->timestamps();
             //今回2038年問題は対応しません(18年も代々使われるシステムを作るつもりはないです)
 
