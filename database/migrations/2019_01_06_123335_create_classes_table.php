@@ -19,7 +19,6 @@ class CreateClassesTable extends Migration
             $table->string('field',10);
             $table->unsignedInteger('graduation_year');
             $table->unsignedInteger('grade');
-            $table->timestamps();
         });
     }
 
