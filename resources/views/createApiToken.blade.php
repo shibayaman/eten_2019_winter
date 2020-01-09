@@ -16,9 +16,9 @@
         </div>
         <div class="control">
             <div class="select">
-                <select name="department">
-                    <option value="{{ Config::get('const.departments')['IT'] }}">IT</option>
-                    <option value="{{ Config::get('const.departments')['WEB'] }}">Web</option>
+                <select name="class_id">
+                    <option value="IE1A">IE1A</option>
+                    <option value="IE2A">I</option>
                     <option value="{{ Config::get('const.departments')['GRAPHIC'] }}">Graphic</option>
                 </select>
             </div>
