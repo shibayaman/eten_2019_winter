@@ -8,6 +8,6 @@
 
 @section('content')
 <h1 class="title">トークン管理画面</h1>
-<a href="/tokens/create">トークン発行</a>
+<a href="/admin/owners/create">トークン発行</a>
 @include('components/authLogoutForm')
 @endsection

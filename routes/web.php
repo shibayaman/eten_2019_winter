@@ -19,9 +19,7 @@ Route::post('projects/create', 'ProjectController@create')->name('projects.creat
 Route::resource('projects', 'ProjectController')->except(['create']);
 Route::post('project/confirm', 'Projectcontroller@confirm')->name('projects.confirm');
 
-Route::resource('tokens', 'TokenController');
-
-Route::view('/', 'login');
+Route::view('/', 'auth.login');
 
 Auth::routes([
     'register' => false,
@@ -29,4 +27,10 @@ Auth::routes([
     'reset' => false
 ]);
 
-Route::view('/admin', 'admin')->middleware('auth');
+Route::prefix('admin')->group(function() {
+    Route::get('/login', 'Admin\AuthLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Admin\AuthLoginController@login');
+    Route::post('logout', 'Admin\AuthLoginController@logout')->name('admin.logout');
+    Route::view('/', 'admin.home')->middleware('auth:admin')->name('admin.home');
+    Route::resource('owners', 'OwnerController');
+});

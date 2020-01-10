@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<form action="/tokens" method="post">
+<form action="/admin/owners" method="post">
     @csrf
     <div class="field">
         <label class="label">作品コード</label>
