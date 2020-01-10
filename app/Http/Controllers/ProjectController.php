@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 class ProjectController extends Controller
 {
     public function __construct() {
-        $this->middleware('projectToken')->only([
-            'create', 'store'
-        ]);
+        // $this->middleware('projectToken')->only([
+        //     'create', 'store'
+        // ]);
     }
 
     public function index()
@@ -19,7 +19,7 @@ class ProjectController extends Controller
 
     public function create(Request $request)
     {
-        return $request->tokenData;
+        return view('registration');
     }
 
     public function store(Request $request)
