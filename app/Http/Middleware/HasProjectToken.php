@@ -36,6 +36,5 @@ class HasProjectToken
         return redirect('/')
             ->withErrors(['error' => '入力された組み合わせが見つかりません'])
             ->withInput($request->all());
-        
     }
 }
