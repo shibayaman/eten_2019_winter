@@ -28,7 +28,7 @@ class TokenController extends Controller
     {
         $attributes = $request->validate([
             'project_code' => 'required',
-            'department' => 'required'
+            'class_id' => 'required'
         ]);
 
         $token = Str::random(16);
@@ -36,7 +36,7 @@ class TokenController extends Controller
         Token::create([
             'token' => hash('sha256', $token),
             'project_code' => $attributes['project_code'],
-            'department' => $attributes['department'],
+            'class_id' => $attributes['class_id'],
             'season_id' => Config::get('const.seasonId'),
             'expires_at' => new DateTime(Config::get('const.eventDate'))
         ]);
