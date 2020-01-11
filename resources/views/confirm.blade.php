@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="buttons is-right">
-        <form action="" method="post">
+        <form action="{{Route('projects.store')}}" method="post">
             @csrf
             <input type="hidden" name="title"  value="{{ $project['title'] }}">
             <input type="hidden" name="catch_copy"  value="{{ $project['catch_copy'] }}">
