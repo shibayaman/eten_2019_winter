@@ -11,7 +11,7 @@ class ProjectController extends Controller
 {
     public function __construct() {
         $this->middleware('auth')->only([
-            'create'//, 'store'
+            'create', 'store'
         ]);
     }
 
@@ -25,7 +25,7 @@ class ProjectController extends Controller
         $owner = Auth::user()->only('project_code', 'class_id');
         $class = Auth::user()->class->field;
         return view('registration',compact('owner','class'));
-        // return view('registration')->withOwner($owner);
+        return view('registration')->withOwner($owner);
         // return view('registration');
     }
 
