@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClassesTableSeeder::class,
             SeasonsTableSeeder::class,
+            AdminTableSeeder::class,
         ]);
     }
 }
