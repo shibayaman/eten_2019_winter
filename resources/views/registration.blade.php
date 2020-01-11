@@ -118,7 +118,7 @@
                       </p>
                       <p class="control">
                         <span class="select" id="time_tag">
-                          <select>
+                          <select name="time_tag">
                             <option>時間</option>
                             <option>週間</option>
                             <option>ヶ月</option>
