@@ -1,7 +1,7 @@
 @extends('layouts/app')
 
 @section('cssFile')
-<link rel="stylesheet" href="{{ asset('css/example.css') }}">
+<link rel="stylesheet" href="{{ asset('css/registration.css') }}">
 @endsection
 
 @section('content')
@@ -12,12 +12,12 @@
     </div>
     <div class="column is-offset-4">
         <div class="title is-6">作品コード    
-            <span class="tag is-light is-large">W100</span>
+            <span class="tag is-light is-large">{{ $project['project_code'] }}</span>
         </div>
     </div>
     <div class="column">
         <div class="title is-6">クラス   
-            <span class="tag is-light is-large">SK2A</span>
+            <span class="tag is-light is-large">{{ $project['class_id'] }}</span>
         </div>
     </div>
 </div>
@@ -34,18 +34,6 @@
                 <div class="column">{{ $project['title'] }}</div>
             </div>
             <div class="columns">
-                <div class="column is-3"><h5 class="title is-5">チーム名</h5></div>
-                <div class="column">{{ $project['team'] }}</div>
-            </div>
-            <div class="columns">
-                <div class="column is-3"><h5 class="title is-5">代表者名</h5></div>
-                <div class="column">{{ $project['represent'] }}</div>
-            </div>
-            <div class="columns">
-                <div class="column is-3"><h5 class="title is-5">メンバー</h5></div>
-                <div class="column">{{ implode(',',$project['member']) }}</div>
-            </div>
-            <div class="columns">
                 <div class="column is-3"><h5 class="title is-5">キャッチコピー</h5></div>
                 <div class="column">{{ $project['catch_copy'] }}</div>
             </div>
@@ -54,13 +42,26 @@
                 <div class="column">{{ $project['detail'] }}</div>
             </div>
             <div class="columns">
-                <div class="column is-3"><h5 class="title is-5">ジャンル</h5></div>
-                <div class="column">{{ $project['genre'] }}</div>
-            </div>
-            <div class="columns">
                 <div class="column is-3"><h5 class="title is-5">制作期間</h5></div>
                 <div class="column">{{ $project['period'] }}</div>
             </div>
+            <div class="columns">
+                <div class="column is-3"><h5 class="title is-5">代表者名</h5></div>
+                <div class="column">{{ $project['represent'] }}</div>
+            </div>
+            <div class="columns">
+                <div class="column is-3"><h5 class="title is-5">チーム名</h5></div>
+                <div class="column">{{ $project['team'] }}</div>
+            </div>
+            <div class="columns">
+                <div class="column is-3"><h5 class="title is-5">メンバー</h5></div>
+                <div class="column">{{ implode(',',$project['member']) }}</div>
+            </div> 
+            <div class="columns">
+                <div class="column is-3"><h5 class="title is-5">ジャンル</h5></div>
+                <div class="column">{{ $project['genre'] }}</div>
+            </div>
+            
         </div>
     </div>
     <div class="buttons is-right">
@@ -70,7 +71,7 @@
             <input type="hidden" name="catch_copy"  value="{{ $project['catch_copy'] }}">
             <input type="hidden" name="detail"  value="{{ $project['detail'] }}">
             <input type="hidden" name="image"  value="{{ $path }}">
-            <input type="hidden" name="period"  value="{{ $project['period'] }}">
+            <input type="hidden" name="period"  value="{{ $project['period'] . $project['time_tag'] }}">
             <input type="hidden" name="represent"  value="{{ $project['represent'] }}">
             <input type="hidden" name="team"  value="{{ $project['team'] }}">
             <input type="hidden" name="member"  value="{{ implode(',',$project['member']) }}">

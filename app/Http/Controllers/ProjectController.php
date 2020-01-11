@@ -28,6 +28,7 @@ class ProjectController extends Controller
     public function confirm(Request $request){
         $path = basename($request->file('image')->store('public/image'));
         $project = $request->except('image');
+        $project['member'] = array_filter($project['member'],'strlen');
         return view('confirm',compact('project','path'));
     }
 
