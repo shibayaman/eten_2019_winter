@@ -9,8 +9,8 @@
 
 @section('content')
 <h1 class="title">作品登録ログイン画面</h1>
-<a class="is-pulled-right" href="{{ Route('admin.login') }}">管理者用ページへ</a>
-<form action="{{ Route('login') }}" method="post">
+<a class="is-pulled-right" href="{{ route('admin.login') }}">管理者用ページへ</a>
+<form action="{{ route('login') }}" method="post">
     @csrf
     <div class="field">
         <label class="label">作品コード</label>

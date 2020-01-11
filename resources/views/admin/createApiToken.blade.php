@@ -1,13 +1,13 @@
 @extends('layouts/app')
 
-@section('title', 'API発行')
+@section('title', 'ユーザー作成')
 
 @section('cssFile')
 <link rel="stylesheet" href="{{ asset('css/example.css') }}">
 @endsection
 
 @section('content')
-<form action="/admin/owners" method="post">
+<form action="{{ route('owners.store') }}" method="post">
     @csrf
     <div class="field">
         <label class="label">作品コード</label>

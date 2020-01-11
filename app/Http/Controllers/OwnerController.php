@@ -14,9 +14,21 @@ class OwnerController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->has('field')) {
+            $field = $request->query('field');
+            $validFields = Config::get('const.fields');
+
+            if(in_array($field, $validFields)) {
+                $owners = Owner::whereIn('class_id', function($query) use ($field) {
+                    $query->from('classes')
+                        ->select('classes.id')
+                        ->where('classes.field', $field);
+                })->get();
+            }
+        }
+        return $owners ?? Owner::all();
     }
 
     public function create()

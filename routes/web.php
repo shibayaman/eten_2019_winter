@@ -30,6 +30,9 @@ Route::prefix('admin')->group(function() {
     Route::get('/login', 'Admin\AuthLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AuthLoginController@login');
     Route::post('logout', 'Admin\AuthLoginController@logout')->name('admin.logout');
-    Route::view('/', 'admin.home')->middleware('auth:admin')->name('admin.home');
+
+    Route::view('/', 'admin.home', ['fields' => Config::get('const.fields')])
+        ->middleware('auth:admin')->name('admin.home');
+        
     Route::resource('owners', 'OwnerController');
 });
