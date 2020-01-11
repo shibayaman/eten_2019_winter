@@ -15,7 +15,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
                               + '<div class="field-body">'
                               + '<div class="field">'
                               + '<div class="control has-icons-left has-icons-right">'
-                              + '<input class="input column is-one-third" type="text" name="member[]" placeholder="代表者以外のメンバーの名前を入力してください">'
+                              + '<input class="input column is-one-third" type="text" name="member[]" maxlength="30" placeholder="代表者以外のメンバーの名前を入力してください">'
                               + '<span class="icon is-small is-left">'
                               + '<i class="fas fa-user"></i>'
                               + '</span>'
@@ -29,13 +29,13 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
 
   $("#title").on("blur", function(){
     if($(this).val() != ""){
-      $("#title").removeClass().addClass("input column is-two-thirds");
+      $("#title").removeClass().addClass("input column is-half");
     }
   });
 
   $("#catch_copy").on("blur", function(){
     if($(this).val() != ""){
-      $("#catch_copy").removeClass().addClass("input column is-two-thirds");
+      $("#catch_copy").removeClass().addClass("input column is-half");
     }
   });
 
@@ -59,7 +59,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
 
   $("#represent").on("blur", function(){
     if($(this).val() != ""){
-      $("#represent").removeClass().addClass("input column is-one-thirds");
+      $("#represent").removeClass().addClass("input column is-one-third");
     }
   });
 
@@ -69,22 +69,27 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
     }
   });
 
+  $(document).on("blur", "#othergenre", function(){
+    if($(this).val() != ""){
+      $("#othergenre").removeClass().addClass("input column is-one-third");
+    }
+  });
+
   $("#genre").on("change", function(){
     if($(this).val() == "その他"){
-      $("#genrefield").append('<div class="field is-horizontal" id="other">'
+      $("#genrefield").append('<div class="field is-horizontal" id="otherform">'
                               + '<div class="field-label is-normal"></div>'
                               + '<div class="field-body">'
                               + '<div class="field">'
                               + '<div class="control">'
-                              + '<input class="input column is-one-third" type="text" name="genre" placeholder="ジャンル名を入力してください">'
+                              + '<input class="input column is-one-third" type="text" id="othergenre" maxlength="30" placeholder="ジャンル名を入力してください">'
                               + '</div>'
-                              + '<p class="help">空の場合はジャンルは「その他」になります</p>'
                               + '</div>'
                               + '</div>'
                               + '</div>');
     }
     if($(this).val() != "その他"){
-      $("#other").remove();
+      $("#otherform").remove();
     }
 
   });
@@ -97,12 +102,12 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
     $("#attention").remove();
 
     if($("#title").val() == ""){
-      $("#title").removeClass().addClass("input column is-two-thirds is-danger");
+      $("#title").removeClass().addClass("input column is-half is-danger");
       submitflg = false;
     }
 
     if($("#catch_copy").val() == ""){
-      $("#catch_copy").removeClass().addClass("input column is-two-thirds is-danger");
+      $("#catch_copy").removeClass().addClass("input column is-half is-danger");
       submitflg = false;
     }
 
@@ -130,7 +135,16 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
       submitflg = false;
     }
 
-    if(!submitflg){
+    if($("#othergenre").val() == ""){
+      $("#othergenre").removeClass().addClass("input column is-one-third is-danger");
+      submitflg = false;
+    }
+
+    if(submitflg){
+      if($("#genre").val() == "その他"){
+        $("#other").val($("#othergenre").val());
+      }
+    }else{
       $("#attention-field").append('<div class="container" id="attention">'
                                   + '<div class="box content column is-5 is-offset-one-quarter">'
                                   + '<label class="label column is-offset-3" style="color:hsl(348, 86%, 61%);font-weight:bold;">必須項目が入力されていません</label>'
