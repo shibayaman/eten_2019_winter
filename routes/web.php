@@ -26,11 +26,6 @@ Auth::routes([
     'reset' => false
 ]);
 
-<<<<<<< HEAD
-Route::view('/admin', 'admin')->middleware('auth');
-
-Route::post('projects/store', 'ProjectController@store');
-=======
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Admin\AuthLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AuthLoginController@login');
@@ -41,4 +36,3 @@ Route::prefix('admin')->group(function() {
         
     Route::resource('owners', 'OwnerController');
 });
->>>>>>> 9795d39b1d25f474046777ebef69ff90800480b9
