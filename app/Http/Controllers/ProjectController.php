@@ -19,7 +19,14 @@ class ProjectController extends Controller
 
     public function create(Request $request)
     {
+        // return $request->tokenData;
         return view('registration');
+    }
+
+    public function confirm(Request $request){
+        $path = basename($request->file('image')->store('public/image'));
+        $project = $request->except('image');
+        return view('confirm',compact('project','path'));
     }
 
     public function store(Request $request)

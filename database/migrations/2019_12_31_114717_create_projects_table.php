@@ -23,6 +23,7 @@ class CreateProjectsTable extends Migration
             $table->string('leader_name', 30);
             $table->string('team_name', 30);
             $table->string('team_member', 120);
+            $table->string('genre', 30);
             $table->unsignedBigInteger('token_id');
             $table->timestamps();
             $table->foreign('token_id')->references('id')->on('tokens')->onDelete('cascade');
