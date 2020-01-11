@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'eventDate' => '2019/02/01',
+	'eventDate' => '2020/02/01',
 	'seasonId' => '1',
 	'departments' => [
 		'IT' => 'IT',

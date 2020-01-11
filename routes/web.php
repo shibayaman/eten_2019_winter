@@ -18,7 +18,7 @@ Route::get('/example', function () {
 Route::resource('projects', 'ProjectController');
 Route::post('project/confirm', 'Projectcontroller@confirm')->name('projects.confirm');
 
-Route::view('/', 'auth.login');
+Route::get('/', 'Auth\LoginController@showLoginForm');
 
 Auth::routes([
     'register' => false,
