@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Project;
 
 class ProjectController extends Controller
 {
@@ -39,15 +40,27 @@ class ProjectController extends Controller
             'period' => 'required|max:15',
             'represent' => 'required|max:30',
             'team' => 'required|max:30',
-            'member.*' => 'max:120',
+            'member' => 'max:120',
             'genre' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect('/create');
+            return redirect('create');
         }
 
-        return redirect('/completion');
+        $project = new Project();
+        $project->product_name = $request->title;
+        $project->catchphrase = $request->catch_copy;
+        $project->description = $request->detail;
+        $project->image_path = $request->image;
+        $project->production_time = $request->period;
+        $project->leader_name = $request->represent;
+        $project->team_name = $request->team;
+        $project->team_member = $request->member;
+        $project->genre = $request->genre;
+        $project->save();
+
+        return view('/completion');
     }
 
     public function show($id)

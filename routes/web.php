@@ -31,4 +31,4 @@ Auth::routes([
 
 Route::view('/admin', 'admin')->middleware('auth');
 
-Route::post('', 'ProjectController@store');
+Route::post('projects/store', 'ProjectController@store');
