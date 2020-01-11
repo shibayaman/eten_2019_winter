@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Auth;
-use Config;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
-
-class LoginController extends Controller
+class AuthLoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
     /**
      * Create a new controller instance.
@@ -39,18 +36,20 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('notAdmin')->only('login');
+        $this->middleware('guest:admin')->except('logout');
+        $this->middleware('notOwner')->only('login');
     }
 
     public function username() {
-        return 'project_code';
+        return 'username';
     }
 
-    protected function credentials(Request $request)
+    public function showLoginForm() {
+        return view('admin.auth.login');
+    }
+
+    protected function guard()
     {
-        $credentials = $request->only($this->username(), 'password');
-        $credentials['season_id'] = Config::get('const.seasonId');
-        return $credentials;
+        return Auth::guard('admin');
     }
 }

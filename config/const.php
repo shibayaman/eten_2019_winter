@@ -1,11 +1,11 @@
 <?php
 
 return [
-	'eventDate' => '2019/02/01',
+	'eventDate' => '2020/02/01',
 	'seasonId' => '1',
-	'departments' => [
+	'fields' => [
 		'IT' => 'IT',
-		'WEB' => 'WEB',
-		'GRAPHIC' => 'GRAPHIC'
+		'WEB' => 'Web',
+		'GRAPHIC' => 'グラフィック'
 	]
 ];

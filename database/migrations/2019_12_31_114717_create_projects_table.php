@@ -24,9 +24,9 @@ class CreateProjectsTable extends Migration
             $table->string('team_name', 30);
             $table->string('team_member', 120);
             $table->string('genre', 30);
-            $table->unsignedBigInteger('token_id');
+            $table->unsignedBigInteger('owner_id');
             $table->timestamps();
-            $table->foreign('token_id')->references('id')->on('tokens')->onDelete('cascade');
+            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
         });
     }
 

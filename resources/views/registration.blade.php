@@ -19,10 +19,15 @@
       <div class="field">
         <div class="columns">
           <div class="column is-offset-3">
-            <label class="label is-large">作品コード : ダミー</label>
+            <label class="label is-large">作品コード : {{ $owner['project_code'] }}</label>
           </div>
           <div class="column">
-            <label class="label is-large">クラス名 : ダミー</label>
+            <label class="label is-large">クラス名 : {{ $owner['class_id'] }} </label>
+          </div>
+          <div class="column">
+            <form action="{{ route('logout') }}" method="post">
+              <input type="submit" value="logout" class="button">
+            </form>
           </div>
         </div>
       </div>
