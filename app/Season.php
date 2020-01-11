@@ -9,6 +9,6 @@ class Season extends Model
     public $timestamps = false;
 
     public function season() {
-        return $this->hasMany('App\Token');
+        return $this->hasMany('App\Owner');
     }
 }

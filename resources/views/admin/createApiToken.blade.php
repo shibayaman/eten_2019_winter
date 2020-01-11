@@ -1,13 +1,13 @@
 @extends('layouts/app')
 
-@section('title', 'API発行')
+@section('title', 'ユーザー作成')
 
 @section('cssFile')
 <link rel="stylesheet" href="{{ asset('css/example.css') }}">
 @endsection
 
 @section('content')
-<form action="/tokens" method="post">
+<form action="{{ route('owners.store') }}" method="post">
     @csrf
     <div class="field">
         <label class="label">作品コード</label>
@@ -18,8 +18,8 @@
             <div class="select">
                 <select name="class_id">
                     <option value="IE1A">IE1A</option>
-                    <option value="IE2A">I</option>
-                    <option value="{{ Config::get('const.departments')['GRAPHIC'] }}">Graphic</option>
+                    <option value="IE2A">IE2A</option>
+                    <option value="IE3A">IE3A</option>
                 </select>
             </div>
         </div>

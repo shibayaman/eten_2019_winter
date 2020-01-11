@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Project;
 
 class ProjectController extends Controller
 {
     public function __construct() {
-        $this->middleware('projectToken')->only([
+        $this->middleware('auth')->only([
             'create', 'store'
         ]);
     }
@@ -20,8 +21,9 @@ class ProjectController extends Controller
 
     public function create(Request $request)
     {
-        // return $request->tokenData;
-        return view('registration');
+        $owner = Auth::user()->only('project_code', 'class_id');
+        return view('registration')->withOwner($owner);
+        // return view('registration');
     }
 
     public function confirm(Request $request){

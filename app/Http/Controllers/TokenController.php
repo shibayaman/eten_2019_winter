@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\support\Facades\Config;
-use DateTime;
 use App\Token;
+use DateTime;
+use Illuminate\Http\Request;
+use Illuminate\support\Facades\Config;
+use Illuminate\Support\Str;
 
 class TokenController extends Controller
 {

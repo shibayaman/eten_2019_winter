@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\NoHashUserProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Auth::provider('eloquentnohash', function ($app, array $config) {
+            return new NoHashUserProvider($app['hash'], $config['model']);
+        });
     }
 }
