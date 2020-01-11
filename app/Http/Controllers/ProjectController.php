@@ -21,7 +21,9 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         $owner = Auth::user()->only('project_code', 'class_id');
-        return view('registration')->withOwner($owner);
+        $class = Auth::user()->class->field;
+        return view('registration',compact('owner','class'));
+        // return view('registration')->withOwner($owner);
         // return view('registration');
     }
 
