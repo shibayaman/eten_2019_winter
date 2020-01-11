@@ -6,16 +6,19 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
     }
   }
 
-  var count = 1;
+  var count = 0;
+  // var memberID;
 
   $('#add_member').on('click', function() {
-    if(count < 10){
+    // memberID = `member${count}`;
+    if(count <= 10 && $(`#member${count}`).val() != ""){
+      count++;
       $('#memberinput').append('<div class="field is-horizontal">'
                               + '<div class="field-label is-normal"></div>'
                               + '<div class="field-body">'
                               + '<div class="field">'
                               + '<div class="control has-icons-left has-icons-right">'
-                              + '<input class="input column is-one-third" type="text" name="member[]" maxlength="30" placeholder="代表者以外のメンバーの名前を入力してください">'
+                              + `<input class="input column is-half" type="text" id="member${count}" name="member[]" maxlength="30" placeholder="代表者以外のメンバーの名前を入力してください">`
                               + '<span class="icon is-small is-left">'
                               + '<i class="fas fa-user"></i>'
                               + '</span>'
@@ -23,7 +26,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
                               + '</div>'
                               + '</div>'
                               + '</div>');
-      count++;
+      console.log($(`#member${count}`).val());
     }
   });
 
@@ -59,19 +62,19 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
 
   $("#represent").on("blur", function(){
     if($(this).val() != ""){
-      $("#represent").removeClass().addClass("input column is-one-third");
+      $("#represent").removeClass().addClass("input column is-half");
     }
   });
 
   $("#team").on("blur", function(){
     if($(this).val() != ""){
-      $("#team").removeClass().addClass("input column is-one-third");
+      $("#team").removeClass().addClass("input column is-half");
     }
   });
 
   $(document).on("blur", "#othergenre", function(){
     if($(this).val() != ""){
-      $("#othergenre").removeClass().addClass("input column is-one-third");
+      $("#othergenre").removeClass().addClass("input column is-half");
     }
   });
 
@@ -82,7 +85,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
                               + '<div class="field-body">'
                               + '<div class="field">'
                               + '<div class="control">'
-                              + '<input class="input column is-one-third" type="text" id="othergenre" maxlength="30" placeholder="ジャンル名を入力してください">'
+                              + '<input class="input column is-half" type="text" id="othergenre" maxlength="30" placeholder="ジャンル名を入力してください">'
                               + '</div>'
                               + '</div>'
                               + '</div>'
@@ -96,7 +99,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
 
 
 
-  $('form').on("submit", function() {
+  $('#registration_form').on("submit", function() {
     var submitflg = true;
 
     $("#attention").remove();
@@ -126,17 +129,17 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
     }
 
     if($("#represent").val() == ""){
-      $("#represent").removeClass().addClass("input column is-one-third is-danger");
+      $("#represent").removeClass().addClass("input column is-half is-danger");
       submitflg = false;
     }
 
     if($("#team").val() == ""){
-      $("#team").removeClass().addClass("input column is-one-third is-danger");
+      $("#team").removeClass().addClass("input column is-half is-danger");
       submitflg = false;
     }
 
     if($("#othergenre").val() == ""){
-      $("#othergenre").removeClass().addClass("input column is-one-third is-danger");
+      $("#othergenre").removeClass().addClass("input column is-half is-danger");
       submitflg = false;
     }
 
