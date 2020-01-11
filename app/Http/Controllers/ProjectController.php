@@ -23,6 +23,12 @@ class ProjectController extends Controller
         return view('registration');
     }
 
+    public function confirm(Request $request){
+        $path = basename($request->file('image')->store('public/image'));
+        $project = $request->except('image');
+        return view('confirm',compact('project','path'));
+    }
+
     public function store(Request $request)
     {
         return "I'm hoping someone would implement me some time in the future...";
