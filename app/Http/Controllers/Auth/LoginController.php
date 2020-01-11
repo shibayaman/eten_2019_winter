@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class LoginController extends Controller
 {
@@ -40,6 +42,13 @@ class LoginController extends Controller
     }
 
     public function username() {
-        return 'username';
+        return 'project_code';
+    }
+
+    protected function credentials(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+        $credentials['season_id'] = Config::get('const.seasonId');
+        return $credentials;
     }
 }

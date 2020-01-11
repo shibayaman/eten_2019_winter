@@ -72,7 +72,7 @@ return [
 
     'providers' => [
         'owners' => [
-            'driver' => 'eloquent',
+            'driver' => 'eloquentnohash',
             'model' => App\Owner::class,
         ],
 
