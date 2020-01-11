@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Project;
 
 class ProjectController extends Controller
 {
     public function __construct() {
         $this->middleware('auth')->only([
-            'create', 'store'
+            'create'//, 'store'
         ]);
     }
 
@@ -65,6 +66,7 @@ class ProjectController extends Controller
         $project->team_name = $request->team;
         $project->team_member = $request->member;
         $project->genre = $request->genre;
+        $project->owner_id = $owner;
         $project->owner_id = $owner->id;
         $project->save();
 
