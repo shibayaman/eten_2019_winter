@@ -27,4 +27,6 @@ class Owner extends Authenticatable
     public function class(){
         return $this->belongsTo('App\Classes');
     }
+
+    protected $rememberTokenName = false;
 }

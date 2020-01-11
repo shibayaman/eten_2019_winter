@@ -37,6 +37,7 @@ class AuthLoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
+        $this->middleware('notOwner')->only('login');
     }
 
     public function username() {
