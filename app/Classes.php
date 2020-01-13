@@ -9,6 +9,7 @@ class Classes extends Model
 {
     protected $table = 'classes';
     public $timestamps = false;
+    public $incrementing = false;
 
     public function season() {
         return $this->hasMany('App\Owner');
