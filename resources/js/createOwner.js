@@ -1,7 +1,7 @@
 $(() => {
 	$('#add-project-code').on('click', () => {
 		if($('.project-code-field').length >= 40) {
-			$('.help-max-40').show();
+			$('#help-max-40').show();
 			return;
 		}
 

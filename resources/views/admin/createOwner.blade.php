@@ -3,7 +3,7 @@
 @section('title', 'ユーザー作成')
 
 @section('cssFile')
-<link rel="stylesheet" href="{{ asset('css/example.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 {{-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> --}}
 @endsection
 
@@ -66,7 +66,7 @@
             <div class="field">
                 <div class="control">
                     <button type="button" id="add-project-code" class="button">追加</button>
-                    <p id="help-max-40" class="help is-danger" style="display:none">同時に作成できるユーザーは40字までです</p>
+                    <p id="help-max-40" class="help is-danger" style="display:none">同時に作成できるユーザーは40人までです</p>
                 </div>
             </div>
         </div>
