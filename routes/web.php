@@ -17,11 +17,8 @@ Route::get('/example', function () {
 
 Route::resource('projects', 'ProjectController')->middleware('checkProject');
 Route::post('project/confirm', 'Projectcontroller@confirm')->name('projects.confirm');
-<<<<<<< HEAD
 Route::get('project/edit', 'Projectcontroller@edit')->name('projects.edit');
-=======
 Route::post('project/store', 'Projectcontroller@store')->name('projects.store');
->>>>>>> 5fb946ef3d5b0e35a4391b4813e5830e78b56ca2
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
 
