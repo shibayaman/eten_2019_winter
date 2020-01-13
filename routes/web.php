@@ -17,6 +17,7 @@ Route::get('/example', function () {
 
 Route::resource('projects', 'ProjectController');
 Route::post('project/confirm', 'Projectcontroller@confirm')->name('projects.confirm');
+Route::post('project/store', 'Projectcontroller@store')->name('projects.store');
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
 

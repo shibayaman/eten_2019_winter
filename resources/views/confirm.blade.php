@@ -12,12 +12,12 @@
     </div>
     <div class="column is-offset-4">
         <div class="title is-6">作品コード    
-            <span class="tag is-light is-large">{{ $project['project_code'] }}</span>
+            <span class="tag is-dark is-large">{{ $project['project_code'] }}</span>
         </div>
     </div>
     <div class="column">
         <div class="title is-6">クラス   
-            <span class="tag is-light is-large">{{ $project['class_id'] }}</span>
+            <span class="tag is-dark is-large">{{ $project['class_id'] }}</span>
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="columns">
                 <div class="column is-3"><h5 class="title is-5">制作期間</h5></div>
-                <div class="column">{{ $project['period'] }}</div>
+                <div class="column">{{ $project['period'] . $project['time_tag'] }}</div>
             </div>
             <div class="columns">
                 <div class="column is-3"><h5 class="title is-5">代表者名</h5></div>
@@ -65,7 +65,7 @@
         </div>
     </div>
     <div class="buttons is-right">
-        <form action="" method="post">
+        <form action="{{Route('projects.store')}}" method="post">
             @csrf
             <input type="hidden" name="title"  value="{{ $project['title'] }}">
             <input type="hidden" name="catch_copy"  value="{{ $project['catch_copy'] }}">
