@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes;
 use App\Owner;
+use Config;
 use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Str;
 
 class OwnerController extends Controller
 {
@@ -33,27 +35,40 @@ class OwnerController extends Controller
 
     public function create()
     {
-        return view('admin.createApiToken');
+        $classes = Classes::all()->modelKeys();
+        return view('admin.createOwner')->withClasses($classes);
     }
 
     public function store(Request $request)
     {
-        $attributes = $request->validate([
+        $input = $request->validate([
+            'class_id' => 'required|exists:classes,id',
             'project_code' => 'required',
-            'class_id' => 'required'
+            'project_code.*' => [
+                'required',
+                'distinct',
+                'max:20',
+                Rule::unique('owners', 'project_code')->where(function ($query) {
+                    return $query->where('season_id', Config::get('const.seasonId'));
+                })
+            ]
         ]);
 
-        $token = Str::random(16);
+        $projects = array_map(function($projectCode) use($input) {
+            return [
+                'project_code' => $projectCode,
+                'password' => Str::random(16),
+                'class_id' => $input['class_id'],
+                'season_id' => Config::get('const.seasonId'),
+                'expires_at' => new DateTime(Config::get('const.eventDate')),
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+            ];
+        }, $input['project_code']);
 
-        Owner::create([
-            'password' => $token,
-            'project_code' => $attributes['project_code'],
-            'class_id' => $attributes['class_id'],
-            'season_id' => Config::get('const.seasonId'),
-            'expires_at' => new DateTime(Config::get('const.eventDate'))
-        ]);
+        Owner::insert($projects);
 
-        return view('admin.apiTokenComplete')->withToken($token);
+        return view('admin.ownerCreated')->withProjects($projects);
     }
 
     public function show($id)
