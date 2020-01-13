@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -41,9 +42,11 @@ class ProjectController extends Controller
         return "I'm hoping someone would implement me some time in the future...";
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $owner = Auth::id();
+        $projects = Project::where('owner_id',$owner)->get();
+        return view('edit',['projects' => $projects]);
     }
 
     public function update(Request $request, $id)
