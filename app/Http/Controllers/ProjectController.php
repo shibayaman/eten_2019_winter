@@ -6,7 +6,7 @@ use Auth;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Project;
+
 
 class ProjectController extends Controller
 {
