@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Project;
@@ -15,9 +16,18 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $fields = Config::get('const.fields');
+        $field = $fields['IT'];
+
+        if($request->has('field')) {
+            if(in_array($request->query('field'), $fields)) {
+                $field = $request->query('field');
+            }
+        }
+
+        return view('index', compact('field', 'fields'));
     }
 
     public function create(Request $request)

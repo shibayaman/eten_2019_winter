@@ -12,7 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/example.js', 'public/js')
-   .js('resources/js/registration.js', 'public/js')
+    .js('resources/js/registration.js', 'public/js')
+    .js('resources/js/createOwner.js', 'public/js')
     .sass('resources/sass/registration.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
     .autoload({
