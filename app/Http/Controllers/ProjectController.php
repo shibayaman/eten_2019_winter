@@ -88,15 +88,16 @@ class ProjectController extends Controller
 
     public function show(Request $request)
     {
-        $article = App\Project::findOrFail($request->id);
-        return view('registration', ['article' => $article]);
-        
+        return "I'm hoping someone would implement me some time in the future...";
     }
 
     public function edit($id)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $article = App\Project::findOrFail($request->id);
+        return view('registration', ['article' => $article]);
+        
     }
+    
 
     public function update(Request $request, $id)
     {
