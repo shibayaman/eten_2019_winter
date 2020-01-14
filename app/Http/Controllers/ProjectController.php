@@ -48,10 +48,7 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
-        $owner = Auth::user()->only('id');
-        $validator = Validator::make($owner->all(), [
-            'id' => 'required|max:20',
-        ]);
+        $owner = Auth::id();
 
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:24',
@@ -66,7 +63,7 @@ class ProjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return view('registration');
+            return redirect()->route('projects.create');
         }
 
         $project = new Project();
@@ -80,7 +77,7 @@ class ProjectController extends Controller
         $project->team_member = $request->member;
         $project->genre = $request->genre;
         $project->owner_id = $owner;
-        $project->owner_id = $owner->id;
+
         $project->save();
 
         return view('/completion');
