@@ -76,9 +76,11 @@ class ProjectController extends Controller
         return view('/completion');
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $article = App\Project::findOrFail($request->id);
+        return view('registration', ['article' => $article]);
+        
     }
 
     public function edit($id)
