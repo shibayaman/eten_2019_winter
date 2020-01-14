@@ -43,7 +43,15 @@ class ProjectController extends Controller
         $path = basename($request->file('image')->store('public/image'));
         $project = $request->except('image');
         $project['member'] = array_filter($project['member'],'strlen');
-        return view('confirm',compact('project','path'));
+
+        //保存か更新か判別する
+        $url = route('projects.store');
+
+        if(Auth::user()->project()->exists()){
+            $url = route('projects.update');
+        }
+
+        return view('confirm',compact('project','path','url'));
     }
 
     public function store(Request $request)
