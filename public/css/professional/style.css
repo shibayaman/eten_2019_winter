@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+.header_top {
+    width: 100%;
+    height: 80px;
+    padding: 0 60px 0 310px;
+}
+
+/*-------- 並び替え --------*/
+
+.header_top_select_wrap {
+    display: flex;
+    align-items: center;
+}
+.header_top_select_wrap p {
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+.header_top_select_wrap select {
+    font-size: 1.3rem;
+    color: #B3B3B3;
+    border: solid 1px #E0E0E0;
+    border-radius: 5px;
+    padding: 8px 30px 8px 15px;
+    background: url(../../img/header_select.png) no-repeat;
+    background-position : center right 15px;
+    background-size: 8px 5px;
+}
+
+/*----------------------------------------------------
+main
+----------------------------------------------------*/
+#main {
+    margin-top: 120px;
+    margin-left: 250px;
+    padding: 0 30px;
+}
+
+/*-------- 作品全体 --------*/
+
+.works_wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.works_wrap::after {
+    content: "";
+    display: block;
+    width: 320px;
+    height: 0;
+}
+
+/*-------- 作品１つ --------*/
+
+.work {
+    width: 320px;
+    padding-bottom: 30px;
+    margin: 0 5px 40px;
+    border-bottom: 1px solid #E0E0E0;
+    transition: opacity .1s ease-in-out;
+}
+.work:hover {
+    opacity: .6;
+}
+.work a {
+    color: #333;
+}
+
+/*-------- 作品画像 & 展示番号 --------*/
+
+.work .work_img_number_wrap {
+    position: relative;
+}
+
+/*-------- 作品画像 --------*/
+
+.work .work_img img{
+    width: 320px;
+    height: auto;
+}
+/*-------- 展示番号 --------*/
+
+.work .number_exhibit {
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+    font-size: 1.5rem;
+    letter-spacing: .1rem;
+    color: #fff;
+    display: inline-block;
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+
+/*-------- 展示番号 色変更 --------*/
+
+.work .number_it {
+    background: #4CBDD2;
+}
+.work .number_design {
+    background: #EA9C14;
+
+}
+
+/*-------- ジャンル --------*/
+
+.work .genre_name {
+    font-size: 1.3rem;
+    margin: 10px 0 3px;
+}
+
+/*-------- ジャンル 色変更 --------*/
+
+.work .genre_it {
+    color: #4CBDD2;
+}
+.work .genre_design {
+    color: #EA9C14;
+}
+
+/*-------- 作品名 --------*/
+
+.work .work_name {
+    font-size: 1.9rem;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+/*-------- 詳細テキスト --------*/
+
+.work .work_ex_text {
+    font-size: 1.4rem;
+    letter-spacing: .05rem;
+    line-height: 1.6;
+    color: #B3B3B3;
+}
+
+/*-------- ページ移動 --------*/
+
+/*-------- hoverしたとき --------*/
+
+.pagenation a:not(.pagenation_dotted):not(.pagenation_not):hover {
+    opacity: .3;
+}
+
+/*-------- ...表示 --------*/
+
+.pagenation .pagenation_dotted {
+    box-shadow: none;
+    color: #9D9D9D;
+    margin: 0;
+}
+
+/*-------- 前へ次へ押せないとき --------*/
+
+.pagenation .pagenation_not {
+    opacity: .3;
+    pointer-events: none;
+}
+
+/*-------- 選択ページ 色変更 --------*/
+
+.pagenation .pagenation_select_it {
+    color: #4CBDD2;
+    border: solid 2px #4CBDD2;
+}
+.pagenation .pagenation_select_design {
+    color: #EB9E14;
+    border: solid 2px #EB9E14;
+}
+
+/*----------------------------------------------------
+スマホ表示
+----------------------------------------------------*/
+
+@media screen and (max-width: 768px) {
+    #main {
+        padding: 0 20px;
+        margin-top: 180px;
+        margin-left: 0;
+    }
+    .header_top {
+        height: 60px;
+        margin-top: 100px;
+        padding: 0 20px;
+    }
+    .work {
+        width: 100%;
+        margin: 0 0 15px;
+        padding-bottom: 15px;
+    }
+    .sp_text_wrap {
+        display: flex;
+    }
+    .work .work_img_number_wrap {
+        height: 90px;
+    }
+    .work .work_img img {
+        width: 160px;
+        margin-right: 10px;
+    }
+    .work .number_exhibit {
+        width: 50px;
+        position: absolute;
+        bottom: 10px;
+        left: 100px;
+        right: 0;
+    }
+    .work .genre_name {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+    .work .work_name {
+        font-size: 1.7rem;
+    }
+    .work .work_ex_text {
+        font-size: 1.3rem;
+        letter-spacing: 0;
+    }
+    .pagenation a{
+        padding: 8px 10px;
+        margin: 2px;
+    }
+}
+@media screen and (max-width: 480px) {
+    #main {
+        padding: 0 10px;
+    }
+    .header_top {
+        padding: 0 10px;
+    }
+}
