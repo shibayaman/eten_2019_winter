@@ -7,6 +7,7 @@ use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Project;
+use App\Owner;
 use App\Classes;
 
 class ProjectController extends Controller
@@ -23,6 +24,7 @@ class ProjectController extends Controller
         $field = $fields['IT'];
         $graduation_year = array(2020,2021,2022,2023);
         $grade = array(1,2,3,4);
+        $query = Owner::where('season_id',Config::get('const.seasonId'));
 
         if($request->has('field')) {
             if(in_array($request->query('field'), $fields)) {
@@ -30,22 +32,23 @@ class ProjectController extends Controller
             }
         }
 
-        $query = Project::query();
-
         if($request->has('orderby')){
-            if(in_array($graduation_year,(int)$request->query('orderby'))){
-                $s = Classes::where('graduation_year',$request->query('orderby'))->get()->toArray();
-                $query->whereIn('class_id',$s);
-                dd($query);
+            //学年と卒業年次のどちらで検索するか判別し、検索列を$columnに格納する
+            if(in_array($request->query('orderby'),$graduation_year)){
+                $column = 'graduation_year';
             }
-            if(in_array($grade,$request->query('orderby'))){
-                $query->where('grade',$request->query('orderby'));
+            if(in_array($request->query('orderby'),$grade)){
+                $column = 'grade';
             }
+            $class = Classes::where($column,$request->query('orderby'))->get()->modelKeys();
+            $query->whereIn('class_id',$class);
         }
 
-        $project = $query->paginate(9);
+        $orderby_field = Classes::where('field',$field)->get()->modelKeys();
+        $query->whereIn('class_id',$orderby_field);
+        $projects = $query->paginate(9);
 
-        return view('index', compact('field', 'fields'));
+        return view('index', compact('field', 'fields','projects'));
     }
 
     public function create(Request $request)
