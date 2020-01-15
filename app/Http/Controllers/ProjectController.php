@@ -88,7 +88,8 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        return view('work');
+        $fields = Config::get('const.fields');
+        return view('work')->withFields($fields);
     }
 
     public function edit($id)

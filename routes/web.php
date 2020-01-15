@@ -19,7 +19,7 @@ Route::resource('projects', 'ProjectController');
 Route::post('project/confirm', 'Projectcontroller@confirm')->name('projects.confirm');
 Route::post('project/store', 'Projectcontroller@store')->name('projects.store');
 
-Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('/', 'ProjectController@index');
 
 Auth::routes([
     'register' => false,
@@ -36,4 +36,8 @@ Route::prefix('admin')->group(function() {
         ->middleware('auth:admin')->name('admin.home');
         
     Route::resource('owners', 'OwnerController');
+});
+
+Route::fallback(function ($route) {
+    return redirect('/');
 });
