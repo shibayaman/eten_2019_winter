@@ -38,7 +38,7 @@
         <div class="field">
           <label class="label">パスワード</label>
           <div class="control">
-              <input class="input column is-three-quarters" type="text" name="password" placeholder="パスワードを入力してください" value="{{old('token')}}">
+              <input class="input column is-three-quarters" type="password" name="password" placeholder="パスワードを入力してください" value="{{old('token')}}">
           </div>
           <!-- @if ($errors->any())
               <p class="help is-danger">パスワードが入力されていません</p>
