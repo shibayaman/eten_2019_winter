@@ -42,9 +42,9 @@
             </div>
             <nav id="nav">
                 <ul>
-                    <li><a class="nav_select_it" href="{{ route('projects.index', ['field' => 'IT']) }}">IT</a></li>
-                    <li><a href="{{ route('projects.index', ['field' => 'WEB']) }}">WEB</a></li>
-                    <li><a href="{{ route('projects.index', ['field' => 'GRAPHIC']) }}">GRAPHIC</a></li>
+                    <li><a class="nav_select_it" href="{{ route('projects.index', ['field' => $fields['IT']]) }}">IT</a></li>
+                    <li><a href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
+                    <li><a href="{{ route('projects.index', ['field' => $fields['GRAPHIC']]) }}">GRAPHIC</a></li>
                 </ul>
             </nav>
         </div>

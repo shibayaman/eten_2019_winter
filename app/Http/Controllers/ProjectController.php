@@ -111,10 +111,11 @@ class ProjectController extends Controller
 
     public function show(Request $request)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $fields = Config::get('const.fields');
+        return view('work')->withFields($fields);
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
         $article = App\Project::findOrFail($request->id);
         return view('registration', ['article' => $article]);

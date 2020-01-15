@@ -30,7 +30,7 @@ class OwnerController extends Controller
                 })->get();
             }
         }
-        return $owners ?? Owner::all();
+        return view('admin.showOwners')->withOwners($owners ?? Owner::all());
     }
 
     public function create()
@@ -54,7 +54,7 @@ class OwnerController extends Controller
             ]
         ]);
 
-        $projects = array_map(function($projectCode) use($input) {
+        $owners = array_map(function($projectCode) use($input) {
             return [
                 'project_code' => $projectCode,
                 'password' => Str::random(16),
@@ -66,9 +66,9 @@ class OwnerController extends Controller
             ];
         }, $input['project_code']);
 
-        Owner::insert($projects);
+        Owner::insert($owners);
 
-        return view('admin.ownerCreated')->withProjects($projects);
+        return view('admin.ownerCreated')->withOwners($owners);
     }
 
     public function show($id)

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ClassesTableSeeder::class,
             SeasonsTableSeeder::class,
             AdminTableSeeder::class,
+            ProjectTableSeeder::class,
         ]);
     }
 }

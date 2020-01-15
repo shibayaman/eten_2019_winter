@@ -16,10 +16,11 @@ Route::get('/example', function () {
 });
 
 Route::resource('projects', 'ProjectController');
-Route::post('project/confirm', 'Projectcontroller@confirm')->name('projects.confirm');
-Route::post('project/store', 'Projectcontroller@store')->name('projects.store');
+Route::get('projects/create', 'ProjectController@create')->middleware('checkProject');
+Route::post('project/confirm', 'ProjectController@confirm')->name('projects.confirm');
+Route::post('project/store', 'ProjectController@store')->name('projects.store');
 
-Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('/', 'ProjectController@index');
 
 Auth::routes([
     'register' => false,
@@ -36,4 +37,8 @@ Route::prefix('admin')->group(function() {
         ->middleware('auth:admin')->name('admin.home');
         
     Route::resource('owners', 'OwnerController');
+});
+
+Route::fallback(function ($route) {
+    return redirect('/');
 });
