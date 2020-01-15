@@ -35,7 +35,7 @@
       </div>
       <hr>
 
-      <div class="field" id="attention-field"></div>
+      <div class="field column is-offset-3" id="attention-field"></div>
 
       <form action="{{Route('projects.confirm')}}" id="registration_form" method="post" enctype="multipart/form-data">
         @csrf

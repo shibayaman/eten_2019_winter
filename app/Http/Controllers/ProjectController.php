@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Project;
+use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,9 +16,18 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $fields = Config::get('const.fields');
+        $field = $fields['IT'];
+
+        if($request->has('field')) {
+            if(in_array($request->query('field'), $fields)) {
+                $field = $request->query('field');
+            }
+        }
+
+        return view('index', compact('field', 'fields'));
     }
 
     public function create(Request $request)
@@ -40,11 +49,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $owner = Auth::user()->only('id');
-        $validator = Validator::make($owner->all(), [
+        $validator = Validator::make(array_merge($request->all(), $owner), [
             'id' => 'required|max:20',
-        ]);
-
-        $validator = Validator::make($request->all(), [
             'title' => 'required|max:24',
             'catch_copy' => 'required|max:40',
             'detail' => 'required|max:300',
@@ -70,24 +76,25 @@ class ProjectController extends Controller
         $project->team_name = $request->team;
         $project->team_member = $request->member;
         $project->genre = $request->genre;
-        $project->owner_id = $owner;
-        $project->owner_id = $owner->id;
+        $project->owner_id = $owner['id'];
         $project->save();
 
         return view('/completion');
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $fields = Config::get('const.fields');
+        return view('work')->withFields($fields);
     }
 
     public function edit(Request $request)
     {
-        $owner = Auth::id();
-        $projects = Project::where('owner_id',$owner)->get();
-        return view('edit',['projects' => $projects]);
+        $article = App\Project::findOrFail($request->id);
+        return view('registration', ['article' => $article]);
+        
     }
+    
 
     public function update(Request $request, $id)
     {

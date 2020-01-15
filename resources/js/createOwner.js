@@ -47,6 +47,12 @@ $(() => {
 		return isFilled;
 	});
 
+	$(document).on("keydown", 'input', (e) => {
+		if ((e.key && e.key === 'Enter') || (e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+			return false;
+		}
+	});
+
 	$(document).on('click', '.delete', (event) => {
 		$(event.target).closest('.project-code-field').remove();
 		$('.help-max-40').hide();
