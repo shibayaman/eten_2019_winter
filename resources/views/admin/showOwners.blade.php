@@ -1,6 +1,6 @@
 @extends('layouts/app')
 
-@section('title', 'ユーザー作成完了')
+@section('title', 'ユーザー一覧')
 
 @section('cssFile')
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">

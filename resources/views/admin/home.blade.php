@@ -13,7 +13,6 @@
 <a href="{{ route('owners.index', ['field' => $fields['IT']]) }}">IT科ユーザー一覧</a> |
 <a href="{{ route('owners.index', ['field' => $fields['WEB']]) }}">Web科ユーザー一覧</a> |
 <a href="{{ route('owners.index', ['field' => $fields['GRAPHIC']]) }}">グラフィック科ユーザー一覧</a>
-{{-- <a href="{{ " --}}
 
 <form action="{{ route('admin.logout') }}" method="post">	
 	@csrf
