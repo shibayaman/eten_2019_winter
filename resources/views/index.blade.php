@@ -52,19 +52,19 @@
             <h3 class="header_top_select_course">●階</h3>
             <div class="header_top_select_wrap">
                 <p>絞り込み</p>
-                <select name="" id="">
+                <select name="orderby" id="orderby">
                     <option value="サンプル" selected>選択してください</option>
                     <optgroup label="学年から選ぶ">
-                        <option value="">1年生</option>
-                        <option value="">2年生</option>
-                        <option value="">3年生</option>
-                        <option value="">4年生</option>
+                        <option value="1">1年生</option>
+                        <option value="2">2年生</option>
+                        <option value="3">3年生</option>
+                        <option value="4">4年生</option>
                     </optgroup>
                     <optgroup label="卒業年次から選ぶ">
-                        <option value="">21年3月卒業</option>
-                        <option value="">22年3月卒業</option>
-                        <option value="">23年3月卒業</option>
-                        <option value="">24年3月卒業</option>
+                        <option value="2021">21年3月卒業</option>
+                        <option value="2022">22年3月卒業</option>
+                        <option value="2023">23年3月卒業</option>
+                        <option value="2024">24年3月卒業</option>
                     </optgroup>
                 </select>
             </div>

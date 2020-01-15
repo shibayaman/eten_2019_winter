@@ -7,6 +7,7 @@ use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Project;
+use App\Classes;
 
 class ProjectController extends Controller
 {
@@ -20,12 +21,29 @@ class ProjectController extends Controller
     {
         $fields = Config::get('const.fields');
         $field = $fields['IT'];
+        $graduation_year = array(2020,2021,2022,2023);
+        $grade = array(1,2,3,4);
 
         if($request->has('field')) {
             if(in_array($request->query('field'), $fields)) {
                 $field = $request->query('field');
             }
         }
+
+        $query = Project::query();
+
+        if($request->has('orderby')){
+            if(in_array($graduation_year,(int)$request->query('orderby'))){
+                $s = Classes::where('graduation_year',$request->query('orderby'))->get()->toArray();
+                $query->whereIn('class_id',$s);
+                dd($query);
+            }
+            if(in_array($grade,$request->query('orderby'))){
+                $query->where('grade',$request->query('orderby'));
+            }
+        }
+
+        $project = $query->paginate(9);
 
         return view('index', compact('field', 'fields'));
     }
