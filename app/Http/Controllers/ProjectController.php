@@ -6,7 +6,7 @@ use Auth;
 use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Project;
+
 
 class ProjectController extends Controller
 {
@@ -88,7 +88,7 @@ class ProjectController extends Controller
         return view('work')->withFields($fields);
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
         $article = App\Project::findOrFail($request->id);
         return view('registration', ['article' => $article]);

@@ -16,6 +16,7 @@ Route::get('/example', function () {
 });
 
 Route::resource('projects', 'ProjectController');
+Route::get('projects/create', 'ProjectController@create')->middleware('checkProject');
 Route::post('project/confirm', 'ProjectController@confirm')->name('projects.confirm');
 Route::post('project/store', 'ProjectController@store')->name('projects.store');
 
