@@ -6,7 +6,7 @@ use Auth;
 use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Project;
+
 
 class ProjectController extends Controller
 {
@@ -48,9 +48,9 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
-        $owner = Auth::id();
-
-        $validator = Validator::make($request->all(), [
+        $owner = Auth::user()->only('id');
+        $validator = Validator::make(array_merge($request->all(), $owner), [
+            'id' => 'required|max:20',
             'title' => 'required|max:24',
             'catch_copy' => 'required|max:40',
             'detail' => 'required|max:300',
@@ -76,26 +76,62 @@ class ProjectController extends Controller
         $project->team_name = $request->team;
         $project->team_member = $request->member;
         $project->genre = $request->genre;
-        $project->owner_id = $owner;
-
+        $project->owner_id = $owner['id'];
         $project->save();
 
         return view('/completion');
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        return view('work');
+        $fields = Config::get('const.fields');
+        return view('work')->withFields($fields);
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $article = App\Project::findOrFail($request->id);
+        return view('registration', ['article' => $article]);
+        
     }
+    
 
     public function update(Request $request, $id)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        $owner = Auth::user()->only('id');
+        $validator = Validator::make(array_merge($request->all(), $owner), [
+            'id' => 'required|max:20',
+            'title' => 'required|max:24',
+            'catch_copy' => 'required|max:40',
+            'detail' => 'required|max:300',
+            'image' => 'required|max:150',
+            'period' => 'required|max:15',
+            'represent' => 'required|max:30',
+            'team' => 'required|max:30',
+            'member' => 'max:120',
+            'genre' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return view('registration');
+        }
+
+        $proid = Auth::user()->project->id;
+
+        $project = project::where('id', proid) -> get();
+        $project->product_name = $request->title;
+        $project->catchphrase = $request->catch_copy;
+        $project->description = $request->detail;
+        $project->image_path = $request->image;
+        $project->production_time = $request->period;
+        $project->leader_name = $request->represent;
+        $project->team_name = $request->team;
+        $project->team_member = $request->member;
+        $project->genre = $request->genre;
+        //$project->owner_id = $owner['id'];
+        $project->save();
+
+        return view('/completion');
     }
 
     public function destroy($id)

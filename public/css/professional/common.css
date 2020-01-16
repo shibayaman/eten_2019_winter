@@ -111,7 +111,7 @@ header {
     position: absolute;
     top: 45%;
     right: 15px;
-    background: url(../img/nav_arrow_design.png) no-repeat;
+    background: url(../../img/nav_arrow_design.png) no-repeat;
     width: 20px;
     height: 10px;
     transition: .2s ease-in-out;
