@@ -24,7 +24,7 @@ class ProjectController extends Controller
         $field = $fields['IT'];
         $graduation_year = array(2020,2021,2022,2023);
         $grade = array(1,2,3,4);
-        $query = Owner::where('season_id',Config::get('const.seasonId'));
+        $query = Owner::with('project')->where('season_id',Config::get('const.seasonId'));
 
         if($request->has('field')) {
             if(in_array($request->query('field'), $fields)) {
@@ -35,20 +35,22 @@ class ProjectController extends Controller
         if($request->has('orderby')){
             //学年と卒業年次のどちらで検索するか判別し、検索列を$columnに格納する
             if(in_array($request->query('orderby'),$graduation_year)){
-                $column = 'graduation_year';
+                // $column = 'graduation_year';
+                $class = Classes::where('graduation_year',$request->query('orderby'))->get()->modelKeys();
+                $query->whereIn('class_id',$class);
             }
             if(in_array($request->query('orderby'),$grade)){
-                $column = 'grade';
+                // $column = 'grade';
+                $class = Classes::where('grade',$request->query('orderby'))->get()->modelKeys();
+                $query->whereIn('class_id',$class);
             }
-            $class = Classes::where($column,$request->query('orderby'))->get()->modelKeys();
-            $query->whereIn('class_id',$class);
         }
 
         $orderby_field = Classes::where('field',$field)->get()->modelKeys();
         $query->whereIn('class_id',$orderby_field);
-        $projects = $query->paginate(9);
+        $owners = $query->paginate(9);
 
-        return view('index', compact('field', 'fields','projects'));
+        return view('index', compact('field', 'fields','owners'));
     }
 
     public function create(Request $request)
