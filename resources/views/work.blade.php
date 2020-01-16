@@ -89,7 +89,7 @@
                     </tr>
                     <tr>
                         <th>代表者</th>
-                        <td><span class="work_course_name">{{$project->token->class->subject}} {{$project->token->class->grade}}年({{$project->token->class->graduation_year}}年卒)</span><br>{{$project->leader_name}}</td>
+                        <td><span class="work_course_name">{{$project->token->class->subject}} {{$project->token->class->grade}}年({{$project->token->class->graduation_year}}年度卒)</span><br>{{$project->leader_name}}</td>
                         <td>
                     </tr>
                     <tr>
