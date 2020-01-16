@@ -42,9 +42,19 @@
             </div>
             <nav id="nav">
                 <ul>
+                    @if($project->token->class->field == "IT")
                     <li><a class="nav_select_it" href="{{ route('projects.index', ['field' => $fields['IT']]) }}">IT</a></li>
                     <li><a href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
                     <li><a href="{{ route('projects.index', ['field' => $fields['GRAPHIC']]) }}">GRAPHIC</a></li>
+                    @elseif($project->token->class->field == "Web")
+                    <li><a href="{{ route('projects.index', ['field' => $fields['IT']]) }}">IT</a></li>
+                    <li><a class="nav_select_design" href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
+                    <li><a href="{{ route('projects.index', ['field' => $fields['GRAPHIC']]) }}">GRAPHIC</a></li>
+                    @else
+                    <li><a href="{{ route('projects.index', ['field' => $fields['IT']]) }}">IT</a></li>
+                    <li><a href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
+                    <li><a class="nav_select_design" href="{{ route('projects.index', ['field' => $fields['GRAPHIC']]) }}">GRAPHIC</a></li>
+                    @endif
                 </ul>
             </nav>
         </div>
@@ -52,39 +62,54 @@
     <main  id="main">
         <div class="work">
             <div class="work_genre_name_wrap">
-                <p class="work_genre_name work_genre_it">PCアプリケーション</p>
-                <h4 class="work_name">作品名作品名作品名</h4>
+
+            @if($project->token->class->field == "IT")
+                <p class="work_genre_name work_genre_it">
+            @else 
+                <p class="work_genre_name work_genre_design">
+            @endif
+                {{$project->genre}}</p>
+
+                <h4 class="work_name">{{$project->product_name}}</h4>
             </div>
             <div class="work_img_table_wrap">
                 <p class="work_img"><img src="{{ asset('img/works_img.jpg') }}" alt="作品画像"></p>
+                @if($project->token->class->field == "IT")
                 <table class="work_select_it work_ex">
+                @else
+                <table class="work_select_design work_ex">
+                @endif
                     <tr>
                         <th>作品番号</th>
-                        <td>W06</td>
+                        <td>{{$project->token->project_code}}</td>
                     </tr>
                     <tr>
                         <th>チーム名</th>
-                        <td>あいうえお</td>
+                        <td>{{$project->team_name}}</td>
                     </tr>
                     <tr>
                         <th>代表者</th>
-                        <td><span class="work_course_name">高度情報処理研究学科 IT開発エキスパートコース 2年(22年度卒)</span><br>田中太郎</td>
+                        <td><span class="work_course_name">{{$project->token->class->subject}} {{$project->token->class->grade}}年({{$project->token->class->graduation_year}}年卒)</span><br>{{$project->leader_name}}</td>
                         <td>
                     </tr>
                     <tr>
                         <th>メンバー</th>
-                        <td>田中太郎 田中太郎 田中太郎 田中太郎</td>
+                        <td>{{$project->team_member}}</td>
                     </tr>
                     <tr>
                         <th>制作期間</th>
-                        <td>2ヶ月</td>
+                        <td>{{$project->production_time}}</td>
                     </tr>
                 </table>
             </div>
+            @if($project->token->class->field == "IT")
             <table class="work_select_it work_comment">
+            @else 
+            <table class="work_select_design work_comment">
+            @endif
                 <tr>
                     <th>作品コメント</th>
-                    <td>詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト詳細テキスト</td>
+                    <td>{{$project->description}}</td>
                 </tr>
             </table>
         </div>
