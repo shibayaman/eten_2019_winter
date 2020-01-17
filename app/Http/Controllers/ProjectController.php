@@ -90,8 +90,11 @@ class ProjectController extends Controller
 
     public function edit(Request $request)
     {
-        $article = App\Project::findOrFail($request->id);
-        return view('registration', ['article' => $article]);
+        $owner = Auth::id();
+        $projects = \App\Project::where('owner_id',$owner)->get();
+        return view('edit',['projects' => $projects]);
+        //return view('registration', ['article' => $article]);
+        //return view('registration')->withOwner($article);
         
     }
     
