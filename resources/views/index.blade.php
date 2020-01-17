@@ -52,21 +52,24 @@
             <h3 class="header_top_select_course">●階</h3>
             <div class="header_top_select_wrap">
                 <p>絞り込み</p>
-                <select name="" id="">
+                <form action="{{ route('projects.index') }}" method="get" id="orderby-form">
+                    <input type="hidden" name="field" value="{{ $field }}">
+                <select name="orderby" id="orderby">
                     <option value="サンプル" selected>選択してください</option>
                     <optgroup label="学年から選ぶ">
-                        <option value="">1年生</option>
-                        <option value="">2年生</option>
-                        <option value="">3年生</option>
-                        <option value="">4年生</option>
+                        <option value="1">1年生</option>
+                        <option value="2">2年生</option>
+                        <option value="3">3年生</option>
+                        <option value="4">4年生</option>
                     </optgroup>
                     <optgroup label="卒業年次から選ぶ">
-                        <option value="">21年3月卒業</option>
-                        <option value="">22年3月卒業</option>
-                        <option value="">23年3月卒業</option>
-                        <option value="">24年3月卒業</option>
+                        <option value="2020">21年3月卒業</option>
+                        <option value="2021">22年3月卒業</option>
+                        <option value="2022">23年3月卒業</option>
+                        <option value="2023">24年3月卒業</option>
                     </optgroup>
                 </select>
+                </form>
             </div>
         </div>
     </header>
@@ -98,6 +101,7 @@
             <a href="">次へ</a>
         </div>
     </main>
+    <script type="text/javascript" src="{{ asset('js/index.js') }}"></script>
 </body>
 
 </html>

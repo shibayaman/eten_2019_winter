@@ -6,7 +6,9 @@ use Auth;
 use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use App\Project;
+use App\Owner;
+use App\Classes;
 
 class ProjectController extends Controller
 {
@@ -20,6 +22,9 @@ class ProjectController extends Controller
     {
         $fields = Config::get('const.fields');
         $field = $fields['IT'];
+        $graduation_year = array(2020,2021,2022,2023);
+        $grade = array(1,2,3,4);
+        $query = Owner::with('project')->where('season_id',Config::get('const.seasonId'));
 
         if($request->has('field')) {
             if(in_array($request->query('field'), $fields)) {
@@ -27,7 +32,25 @@ class ProjectController extends Controller
             }
         }
 
-        return view('index', compact('field', 'fields'));
+        if($request->has('orderby')){
+            //学年と卒業年次のどちらで検索するか判別し、検索列を$columnに格納する
+            if(in_array($request->query('orderby'),$graduation_year)){
+                // $column = 'graduation_year';
+                $class = Classes::where('graduation_year',$request->query('orderby'))->get()->modelKeys();
+                $query->whereIn('class_id',$class);
+            }
+            if(in_array($request->query('orderby'),$grade)){
+                // $column = 'grade';
+                $class = Classes::where('grade',$request->query('orderby'))->get()->modelKeys();
+                $query->whereIn('class_id',$class);
+            }
+        }
+
+        $orderby_field = Classes::where('field',$field)->get()->modelKeys();
+        $query->whereIn('class_id',$orderby_field);
+        $owners = $query->paginate(9);
+
+        return view('index', compact('field', 'fields','owners'));
     }
 
     public function create(Request $request)
@@ -43,7 +66,15 @@ class ProjectController extends Controller
         $path = basename($request->file('image')->store('public/image'));
         $project = $request->except('image');
         $project['member'] = array_filter($project['member'],'strlen');
-        return view('confirm',compact('project','path'));
+
+        //保存か更新か判別する
+        $url = route('projects.store');
+
+        if(Auth::user()->project()->exists()){
+            $url = route('projects.update');
+        }
+
+        return view('confirm',compact('project','path','url'));
     }
 
     public function store(Request $request)
