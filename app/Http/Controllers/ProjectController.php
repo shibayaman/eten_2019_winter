@@ -82,10 +82,12 @@ class ProjectController extends Controller
         return view('/completion');
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
+        
         $fields = Config::get('const.fields');
-        return view('work')->withFields($fields);
+        $project = \App\Project::find($id);
+        return view('work')->withFields($fields)->with('project',$project);
     }
 
     public function edit(Request $request)
