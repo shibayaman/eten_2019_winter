@@ -1,7 +1,6 @@
 {
     "/js/createOwner.js": "/js/createOwner.js",
-    "/js/example.js": "/js/example.js",
+    "/js/registration.js": "/js/registration.js",
     "/css/registration.css": "/css/registration.css",
-    "/css/admin.css": "/css/admin.css",
-    "/js/registration.js": "/js/registration.js"
+    "/css/admin.css": "/css/admin.css"
 }

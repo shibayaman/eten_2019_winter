@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes;
+use App\Project;
 use Auth;
 use Config;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,6 +22,8 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         $fields = Config::get('const.fields');
+        $season = Config::get('seasonId');
+
         $field = $fields['IT'];
 
         if($request->has('field')) {
@@ -27,7 +32,15 @@ class ProjectController extends Controller
             }
         }
 
-        return view('index', compact('field', 'fields'));
+        //whereHasあえて避けてます。
+        $projects = Project::with('owner')->join('owners', 'projects.owner_id', 'owners.id')
+            ->join('classes', 'owners.class_id', 'classes.id')
+            ->select('projects.*')
+            ->where('classes.field', $field)
+            ->orderBy('owners.project_code', 'asc')
+            ->paginate(3);
+
+        return view('index', compact('field', 'fields', 'projects'));
     }
 
     public function create(Request $request)
@@ -90,9 +103,9 @@ class ProjectController extends Controller
 
     public function edit(Request $request)
     {
-        $article = App\Project::findOrFail($request->id);
+        $article = $request->project ?? App\Project::findOfFail($request->id);
+        // $article = App\Project::findOrFail($request->id);
         return view('registration', ['article' => $article]);
-        
     }
     
 
