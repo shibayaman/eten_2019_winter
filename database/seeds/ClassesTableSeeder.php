@@ -18,7 +18,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IE1A',
             'subject' => '高度情報処理研究学科IT開発エキスパートコース',
             'field' => 'IT',
-            'graduation_year' => '2023',
+            'graduation_year' => '23',
             'grade' => '1',
         ]);
 
@@ -26,7 +26,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IE1B',
             'subject' => '高度情報処理研究学科IT開発エキスパートコース',
             'field' => 'IT',
-            'graduation_year' => '2023',
+            'graduation_year' => '23',
             'grade' => '1',
         ]);
 
@@ -34,7 +34,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IE2A',
             'subject' => '高度情報処理研究学科IT開発エキスパートコースシステムエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2022',
+            'graduation_year' => '22',
             'grade' => '2',
         ]);
 
@@ -42,7 +42,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IE3A',
             'subject' => '高度情報処理研究学科IT開発エキスパートコースシステムエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '3',
         ]);
 
@@ -50,7 +50,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IE4A',
             'subject' => '高度情報処理研究学科IT開発エキスパートコースシステムエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '4',
         ]);
 
@@ -58,7 +58,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IN2A',
             'subject' => '高度情報処理研究学科IT開発エキスパートコースネットワークエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2022',
+            'graduation_year' => '22',
             'grade' => '2',
         ]);
 
@@ -66,7 +66,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IN3A',
             'subject' => '高度情報処理研究学科IT開発エキスパートコースネットワークエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '3',
         ]);
 
@@ -74,7 +74,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'IN4A',
             'subject' => '高度情報処理研究学科IT開発エキスパートコースネットワークエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '4',
         ]);
 
@@ -82,7 +82,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'NK2A',
             'subject' => 'マルチメディア研究学科IT開発研究コースネットワークエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '2',
         ]);
 
@@ -90,7 +90,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'NK3A',
             'subject' => 'マルチメディア研究学科IT開発研究コースネットワークエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '3',
         ]);
 
@@ -98,7 +98,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'SK1A',
             'subject' => 'マルチメディア研究学科IT開発研究コース',
             'field' => 'IT',
-            'graduation_year' => '2022',
+            'graduation_year' => '22',
             'grade' => '1',
         ]);
 
@@ -106,7 +106,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'SK2A',
             'subject' => 'マルチメディア研究学科IT開発研究コースシステムエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '2',
         ]);
 
@@ -114,7 +114,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'SK3A',
             'subject' => 'マルチメディア研究学科IT開発研究コースシステムエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '3',
         ]);
 
@@ -122,7 +122,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'SE1A',
             'subject' => 'マルチメディア研究学科システムエンジニアコースシステムエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '1',
         ]);
 
@@ -130,7 +130,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'SE2A',
             'subject' => 'マルチメディア研究学科システムエンジニアコースシステムエンジニア専攻',
             'field' => 'IT',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '2',
         ]);
 
@@ -139,7 +139,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'WD1A',
             'subject' => 'マルチメディア研究学科Webデザインコース',
             'field' => 'Web',
-            'graduation_year' => '2022',
+            'graduation_year' => '22',
             'grade' => '1',
         ]);
 
@@ -147,7 +147,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'WD2A',
             'subject' => 'マルチメディア研究学科Webデザイナーコース',
             'field' => 'Web',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '2',
         ]);
 
@@ -155,7 +155,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'WD3A',
             'subject' => 'マルチメディア研究学科Webデザイナーコース',
             'field' => 'Web',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '3',
         ]);
 
@@ -163,7 +163,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'WE2A',
             'subject' => 'マルチメディア研究学科Webエンジニアコース',
             'field' => 'Web',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '2',
         ]);
 
@@ -171,7 +171,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'WE3A',
             'subject' => 'マルチメディア研究学科Webエンジニアコース',
             'field' => 'Web',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '3',
         ]);
 
@@ -180,7 +180,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'CD2A',
             'subject' => 'マルチメディア研究学科グラフィックデザインコース',
             'field' => 'グラフィック',
-            'graduation_year' => '2021',
+            'graduation_year' => '21',
             'grade' => '2',
         ]);
 
@@ -188,7 +188,7 @@ class ClassesTableSeeder extends Seeder
             'id' => 'CD3A',
             'subject' => 'マルチメディア研究学科グラフィックデザインコース',
             'field' => 'グラフィック',
-            'graduation_year' => '2020',
+            'graduation_year' => '20',
             'grade' => '3',
         ]);
 

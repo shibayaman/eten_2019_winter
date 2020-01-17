@@ -11,16 +11,8 @@
 |
 */
 
-Route::get('/example', function () {
-    return view('example');
-});
-
 Route::resource('projects', 'ProjectController');
-Route::get('projects/create', 'ProjectController@create')->middleware('checkProject');
-Route::post('project/confirm', 'ProjectController@confirm')->name('projects.confirm');
-Route::post('project/store', 'ProjectController@store')->name('projects.store');
-
-Route::get('/', 'ProjectController@index');
+Route::post('projects/confirm', 'ProjectController@confirm')->name('projects.confirm');
 
 Auth::routes([
     'register' => false,
@@ -39,6 +31,4 @@ Route::prefix('admin')->group(function() {
     Route::resource('owners', 'OwnerController');
 });
 
-Route::fallback(function ($route) {
-    return redirect('/');
-});
+Route::fallback('ProjectController@index');

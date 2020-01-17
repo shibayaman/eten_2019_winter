@@ -52,53 +52,48 @@
             <h3 class="header_top_select_course">●階</h3>
             <div class="header_top_select_wrap">
                 <p>絞り込み</p>
-                <select name="" id="">
-                    <option value="サンプル" selected>選択してください</option>
-                    <optgroup label="学年から選ぶ">
-                        <option value="">1年生</option>
-                        <option value="">2年生</option>
-                        <option value="">3年生</option>
-                        <option value="">4年生</option>
-                    </optgroup>
-                    <optgroup label="卒業年次から選ぶ">
-                        <option value="">21年3月卒業</option>
-                        <option value="">22年3月卒業</option>
-                        <option value="">23年3月卒業</option>
-                        <option value="">24年3月卒業</option>
-                    </optgroup>
-                </select>
+                <form action="{{ route('projects.index') }}" method="get" id="orderby-form">
+                    <input type="hidden" name="field" value="{{ $field }}">
+                    <select name="orderby" id="orderby">
+                        <option value="サンプル" selected>選択してください</option>
+                        <optgroup label="学年から選ぶ">
+                            <option value="1">1年生</option>
+                            <option value="2">2年生</option>
+                            <option value="3">3年生</option>
+                            <option value="4">4年生</option>
+                        </optgroup>
+                        <optgroup label="卒業年次から選ぶ">
+                            <option value="2020">21年3月卒業</option>
+                            <option value="2021">22年3月卒業</option>
+                            <option value="2022">23年3月卒業</option>
+                            <option value="2023">24年3月卒業</option>
+                        </optgroup>
+                    </select>
+                </form>
             </div>
         </div>
     </header>
     <main id="main">
         <div class="works_wrap">
-            @foreach ($projects as $project)
+            @foreach ($owners as $owner)
                 <div class="work">
-                    <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="sp_text_wrap">
+                    <a href="{{ route('projects.show', ['project' => $owner->project->id]) }}" class="sp_text_wrap">
                         <div class="work_img_number_wrap">
                             <p class="work_img"><img src="{{ asset('img/works_img.jpg') }}" alt="作品画像"></p>
-                            <p class="number_exhibit @if($field === $fields['IT']) number_it @else number_design @endif">{{ $project->owner->project_code }}</p>
+                            <p class="number_exhibit @if($field === $fields['IT']) number_it @else number_design @endif">{{ $owner->project_code }}</p>
                         </div>
                         <div class="sp_text">
-                            <p class="genre_name @if($field === $fields['IT']) genre_it @else genre_design @endif">{{ $project->genre }}</p>
-                            <h4 class="work_name">{{ $project->product_name }}</h4>
-                            <p class="work_ex_text">{{ $project->description}}</p>
+                            <p class="genre_name @if($field === $fields['IT']) genre_it @else genre_design @endif">{{ $owner->project->genre }}</p>
+                            <h4 class="work_name">{{ $owner->project->product_name }}</h4>
+                            <p class="work_ex_text">{{ $owner->project->description}}</p>
                         </div>
                     </a>
                 </div>
             @endforeach
         </div>
-        {{-- <div class="pagenation">
-            <a class="pagenation_not" href="">前へ</a>
-            <a class="@if($field === $fields['IT']) pagenation_select_it @else pagenation_select_design @endif" href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a class="pagenation_dotted">...</a>
-            <a href="">7</a>
-            <a class="pagenation_not" href="">次へ</a>
-        </div> --}}
-        {{ $projects->onEachSide(1)->links() }}
+        {{ $owners->onEachSide(1)->links() }}
     </main>
+    <script src="{{ asset('js/index.js') }}"></script>
 </body>
 
 </html>

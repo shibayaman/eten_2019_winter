@@ -1,4 +1,3 @@
-{{-- {{dd($elements)}} --}}
 @if ($paginator->hasPages())
     {{-- <div class="pagenation">
         <a class="pagenation_not" href="">前へ</a>
