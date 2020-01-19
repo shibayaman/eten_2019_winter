@@ -18,10 +18,11 @@ class CheckProject
     public function handle($request, Closure $next)
     {
         $owner = Auth::id();
-
-        if(Project::where('owner_id',$owner)->exists() == true){
+        
+        if(Project::where('owner_id', $owner)->exists()){
             return redirect(route('projects.edit'));
         }
+
         return $next($request);
     }
 }

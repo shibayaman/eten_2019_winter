@@ -11,8 +11,10 @@
 |
 */
 
-Route::resource('projects', 'ProjectController');
 Route::post('projects/confirm', 'ProjectController@confirm')->name('projects.confirm');
+Route::get('projects/edit', 'ProjectController@edit')->name('projects.edit');
+Route::post('projects/update', 'ProjectController@update')->name('projects.update');
+Route::resource('projects', 'ProjectController')->only(['index', 'store', 'create', 'show']);
 
 Auth::routes([
     'register' => false,

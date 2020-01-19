@@ -52,9 +52,9 @@
             <h3 class="header_top_select_course">●階</h3>
             <div class="header_top_select_wrap">
                 <p>絞り込み</p>
-                <form action="{{ route('projects.index') }}" method="get" id="orderby-form">
+                <form action="{{ route('projects.index') }}" method="get" id="filter-form">
                     <input type="hidden" name="field" value="{{ $field }}">
-                    <select name="orderby" id="orderby">
+                    <select name="filter" id="filter">
                         <option value="サンプル" selected>選択してください</option>
                         <optgroup label="学年から選ぶ">
                             <option value="1">1年生</option>
@@ -79,7 +79,7 @@
                 <div class="work">
                     <a href="{{ route('projects.show', ['project' => $owner->project->id]) }}" class="sp_text_wrap">
                         <div class="work_img_number_wrap">
-                            <p class="work_img"><img src="{{ asset('img/works_img.jpg') }}" alt="作品画像"></p>
+                            <p class="work_img"><img src="{{ asset('storage/image/' . $owner->project->image_path) }}" alt="作品画像"></p>
                             <p class="number_exhibit @if($field === $fields['IT']) number_it @else number_design @endif">{{ $owner->project_code }}</p>
                         </div>
                         <div class="sp_text">
@@ -95,5 +95,4 @@
     </main>
     <script src="{{ asset('js/index.js') }}"></script>
 </body>
-
 </html>

@@ -22,7 +22,7 @@
     <link rel="alternate" type="" title="" href="http://">
     <link rel="shortcut icon" href="http://www.hoge.hoge/favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="apple-touch-icon" href="http://www.hoge.hoge/logo.png">
-    <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="{{ asset('favicon.ico') }}">
     <title>＋E展 | 作品一覧</title>
     <link rel="stylesheet" href="{{ asset('css/professional/ress.css') }}">
     <link rel="stylesheet" href="{{ asset('css/professional/common.css') }}">
@@ -70,7 +70,7 @@
                 <h4 class="work_name">{{$project->product_name}}</h4>
             </div>
             <div class="work_img_table_wrap">
-                <p class="work_img"><img src="{{ asset('img/works_img.jpg') }}" alt="作品画像"></p>
+                <p class="work_img"><img src="{{ asset('storage/image/' . $project->image_path) }}" alt="作品画像"></p>
                 @if($project->owner->class->field === $fields['IT'])
                     <table class="work_select_it work_ex">
                 @else
@@ -117,5 +117,4 @@
         </div>
     </main>
 </body>
-
 </html>

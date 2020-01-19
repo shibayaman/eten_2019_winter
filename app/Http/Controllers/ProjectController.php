@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Validator;
 class ProjectController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth')->only([
-            'create', 'store'
+        $this->middleware('auth')->except([
+            'index', 'show' 
         ]);
 
         $this->middleware('checkProject')->only([
@@ -27,39 +27,36 @@ class ProjectController extends Controller
     //当該ページに作品未登録のオーナーがいたらindex.blade.phpで落ちる
     public function index(Request $request)
     {
-        $fields = Config::get('const.fields');
         $season = Config::get('seasonId');
 
-        $field = $fields['IT'];
+        $fields = Config::get('const.fields');
+        $field = $request->query('field') ?? $fields['IT'];
+
         $graduation_year = array(2020,2021,2022,2023);
         $grade = array(1,2,3,4);
-        $query = Owner::with('project')->where('season_id',Config::get('const.seasonId'));
 
-        if($request->has('field')) {
-            if(in_array($request->query('field'), $fields)) {
-                $field = $request->query('field');
+        $query = Owner::with('project')->where('season_id', Config::get('const.seasonId'));
+
+        if($request->has('filter')){
+            if(in_array($request->query('filter'), $graduation_year)){
+                $filteredClasses = Classes::where('graduation_year', $request->query('filter'))->get()->modelKeys();
+                $query->whereIn('class_id', $filteredClasses);
+            }
+            if(in_array($request->query('filter'), $grade)){
+                $filteredClasses = Classes::where('grade', $request->query('filter'))->get()->modelKeys();
+                $query->whereIn('class_id', $filteredClasses);
             }
         }
 
-        if($request->has('orderby')){
-            if(in_array($request->query('orderby'), $graduation_year)){
-                $class = Classes::where('graduation_year', $request->query('orderby'))->get()->modelKeys();
-                $query->whereIn('class_id', $class);
-            }
-            if(in_array($request->query('orderby'), $grade)){
-                $class = Classes::where('grade', $request->query('orderby'))->get()->modelKeys();
-                $query->whereIn('class_id', $class);
-            }
-        }
-
-        $orderbyField = Classes::where('field', $field)->get()->modelKeys();
-        $query->whereIn('class_id', $orderbyField);
+        $classesInField = Classes::where('field', $field)->get()->modelKeys();
+        $query->whereIn('class_id', $classesInField);
+        $query->orderBy('project_code');
         $owners = $query->paginate(9);
 
         return view('index', compact('field', 'fields','owners'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
         $owner = Auth::user()->only('project_code', 'class_id');
         $class = Auth::user()->class->field;
@@ -121,17 +118,13 @@ class ProjectController extends Controller
     public function show($id)
     {
         $fields = Config::get('const.fields');
-        $project = \App\Project::with('owner.class')->find($id);
+        $project = Project::find($id);
         return view('work', compact('fields', 'project'));
     }
 
-    public function edit(Request $request)
+    public function edit()
     {
-        $ownerId = Auth::id();
-        $projects = \App\Project::with('owner.class')
-            ->where('owner_id', $ownerId)->get();
-        dd($projects);
-        return view('edit', ['projects' => $projects]);
+        return view('edit')->withOwner(Auth::user());
     }
     
 

@@ -1,5 +1,5 @@
 $(function(){
-    $('#orderby').change(function(){
-        $('#orderby-form').submit();
+    $('#filter').on('change', () => {
+        $('#filter-form').submit();
     });
 });

@@ -10,7 +10,7 @@ $factory->define(Project::class, function (Faker $faker) {
         'product_name' => $faker->word,
         'catchphrase' => $faker->text(40),
         'description' => $faker->text(200),
-        'image_path' => 'testimg',
+        'image_path' => 'sample.jpg',
         'production_time' => $faker->randomNumber(2) . '時間',
         'leader_name' => $faker->name,
         'team_name' => $faker->word,
