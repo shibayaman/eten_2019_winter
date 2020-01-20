@@ -18,9 +18,12 @@
             <div class="field">
                 <div class="controll">
                     <div class="select">
-                        <select name="class_id">
+                        <select id="class-select" name="class_id">
                             @foreach ($classes as $class)
-                                <option value="{{ $class }}">{{ $class }}</option>
+                                <option data-code="{{ $class->field }}"
+                                    value="{{ $class->id }}" {{ $class->id === old('class_id') ? 'selected' : ''}}>
+                                        {{ $class->id }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -34,9 +37,14 @@
             <label class="label">作品コード</label>
         </div>
         <div class="field-body">
-            <div class="field">
-                <div class="control">
-                    <input type="text" class="input column is-half" name="project_code[]" placeholder="作品コード" value="{{ old('project_code.0') }}">
+            <div class="field is-expanded">
+                <div class="field has-addons">
+                    <p class="control">
+                        <a class="button is-static project-code-prefix"></a>
+                    </p>
+                    <p class="control is-expanded">
+                        <input type="text" class="input column is-half" name="project_code[]" placeholder="作品コード" value="{{ old('project_code.0') }}">
+                    </p>
                 </div>
             </div>
         </div>
@@ -49,9 +57,14 @@
                         <button type="button" class="delete"></button>
                     </div>
                     <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <input type="text" class="input column is-half" name="project_code[]" placeholder="作品コード" value="{{ $projectCode }}">
+                        <div class="field is-expanded">
+                            <div class="field has-addons">
+                                <p class="control">
+                                    <a class="button is-static project-code-prefix"></a>
+                                </p>
+                                <p class="control is-expanded">
+                                    <input type="text" class="input column is-half" name="project_code[]" placeholder="作品コード" value="{{ $projectCode }}">
+                                </p>
                             </div>
                         </div>
                     </div>

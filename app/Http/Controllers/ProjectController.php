@@ -122,8 +122,10 @@ class ProjectController extends Controller
         return view('work', compact('fields', 'project'));
     }
 
+    //editはまだ未実装
     public function edit()
     {
+        dd('まだ実装してません。ごめんなちゃい');
         return view('edit')->withOwner(Auth::user());
     }
     
