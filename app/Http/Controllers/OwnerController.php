@@ -33,7 +33,7 @@ class OwnerController extends Controller
             }
         }
         return view('admin.showOwners')
-            ->withOwners($owners ?? Owner::all()->orderBy('project_code'));
+            ->withOwners($owners ?? Owner::orderBy('project_code')->get());
     }
 
     public function create()

@@ -12,7 +12,7 @@
 		<div class="field column is-offset-10">
 			<form action="{{ route('logout') }}" method="post">
 				@csrf
-				<input type="submit" value="ログアウト" class="button is-rounded is-dark is-medium">
+				<input type="submit" value="ログアウト" class="button is-rounded is-outlined is-info is-medium">
 			</form>
 		</div>
 		<div class="field">
