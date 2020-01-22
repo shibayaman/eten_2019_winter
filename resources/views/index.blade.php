@@ -75,23 +75,23 @@
     </header>
     <main id="main">
         <div class="works_wrap">
-            @foreach ($owners as $owner)
+            @foreach ($projects as $project)
                 <div class="work">
-                    <a href="{{ route('projects.show', ['project' => $owner->project->id]) }}" class="sp_text_wrap">
+                    <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="sp_text_wrap">
                         <div class="work_img_number_wrap">
-                            <p class="work_img"><img src="{{ asset('storage/image/' . $owner->project->image_path) }}" alt="作品画像"></p>
-                            <p class="number_exhibit @if($field === $fields['IT']) number_it @else number_design @endif">{{ $owner->project_code }}</p>
+                            <p class="work_img"><img src="{{ asset('storage/image/' . $project->image_path) }}" alt="作品画像"></p>
+                            <p class="number_exhibit @if($field === $fields['IT']) number_it @else number_design @endif">{{ $project->owner->project_code }}</p>
                         </div>
                         <div class="sp_text">
-                            <p class="genre_name @if($field === $fields['IT']) genre_it @else genre_design @endif">{{ $owner->project->genre }}</p>
-                            <h4 class="work_name">{{ $owner->project->product_name }}</h4>
-                            <p class="work_ex_text">{{ $owner->project->description}}</p>
+                            <p class="genre_name @if($field === $fields['IT']) genre_it @else genre_design @endif">{{ $project->genre }}</p>
+                            <h4 class="work_name">{{ $project->product_name }}</h4>
+                            <p class="work_ex_text">{{ $project->description}}</p>
                         </div>
                     </a>
                 </div>
             @endforeach
         </div>
-        {{ $owners->onEachSide(1)->links() }}
+        {{ $projects->onEachSide(1)->links() }}
     </main>
     <script src="{{ asset('js/index.js') }}"></script>
 </body>

@@ -23,37 +23,39 @@ class ProjectController extends Controller
         ]);
     }
 
-    //FIXME: 作品を持たないオーナーも取ってきてしまうので
-    //当該ページに作品未登録のオーナーがいたらindex.blade.phpで落ちる
     public function index(Request $request)
     {
         $season = Config::get('seasonId');
 
         $fields = Config::get('const.fields');
-        $field = $request->query('field') ?? $fields['IT'];
+        $field = $request->query('field');
+
+        if(!in_array($field, $fields)) {
+            $field = $fields['IT'];
+        }
+
+        $conditions['classes.field'] = $field;
 
         $graduation_year = array(2020,2021,2022,2023);
         $grade = array(1,2,3,4);
 
-        $query = Owner::with('project')->where('season_id', Config::get('const.seasonId'));
-
         if($request->has('filter')){
             if(in_array($request->query('filter'), $graduation_year)){
-                $filteredClasses = Classes::where('graduation_year', $request->query('filter'))->get()->modelKeys();
-                $query->whereIn('class_id', $filteredClasses);
+                $conditions['classes.graduation_year'] = $request->query('filter');
             }
             if(in_array($request->query('filter'), $grade)){
-                $filteredClasses = Classes::where('grade', $request->query('filter'))->get()->modelKeys();
-                $query->whereIn('class_id', $filteredClasses);
+                $conditions['classes.grade'] = $request->query('filter');
             }
         }
 
-        $classesInField = Classes::where('field', $field)->get()->modelKeys();
-        $query->whereIn('class_id', $classesInField);
-        $query->orderBy('project_code');
-        $owners = $query->paginate(9);
+        $projects = Project::with('owner')->join('owners', 'projects.owner_id', 'owners.id')
+        ->join('classes', 'owners.class_id', 'classes.id')
+        ->select('projects.*')
+        ->where($conditions)
+        ->orderBy('owners.project_code')
+        ->paginate(9);
 
-        return view('index', compact('field', 'fields','owners'));
+        return view('index', compact('field', 'fields','projects'));
     }
 
     public function create()
@@ -115,10 +117,9 @@ class ProjectController extends Controller
         return view('/completion');
     }
 
-    public function show($id)
+    public function show(Project $project)
     {
         $fields = Config::get('const.fields');
-        $project = Project::find($id);
         return view('work', compact('fields', 'project'));
     }
 
@@ -128,10 +129,11 @@ class ProjectController extends Controller
         dd('まだ実装してません。ごめんなちゃい');
         return view('edit')->withOwner(Auth::user());
     }
-    
 
+    //updateもまだ未実装
     public function update(Request $request, $id)
     {
+        dd('まだ何も送らないでね');
         $owner = Auth::user()->only('id');
         $validator = Validator::make(array_merge($request->all(), $owner), [
             'id' => 'required|max:20',
