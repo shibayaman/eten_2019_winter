@@ -1,2 +1,4 @@
 *
 !.gitignore
+!image
+!image/sample.jpg

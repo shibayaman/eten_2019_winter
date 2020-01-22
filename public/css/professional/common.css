@@ -145,12 +145,12 @@ header {
 
 /*-------- ページ移動 --------*/
 
-.pagenation {
+.pagination {
     font-size: 1.6rem;
     text-align: center;
     margin: 25px 0 80px;
 }
-.pagenation a {
+.pagination a {
     color: #333;
     background: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -162,7 +162,7 @@ header {
 
 /*-------- 前へアイコン --------*/
 
-.pagenation a:first-child::before {
+.pagination a:first-child::before {
     content: "";
     display: inline-block;
     width: 20px;
@@ -172,7 +172,7 @@ header {
 
 /*-------- 次へアイコン --------*/
 
-.pagenation a:last-child::after {
+.pagination a:last-child::after {
     content: "";
     display: inline-block;
     width: 20px;

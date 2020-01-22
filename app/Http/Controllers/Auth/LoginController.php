@@ -53,4 +53,9 @@ class LoginController extends Controller
         $credentials['season_id'] = Config::get('const.seasonId');
         return $credentials;
     }
+
+    protected function loggedOut()
+    {
+        return redirect(route('login'));
+    }
 }

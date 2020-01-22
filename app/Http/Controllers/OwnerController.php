@@ -27,32 +27,55 @@ class OwnerController extends Controller
                     $query->from('classes')
                         ->select('classes.id')
                         ->where('classes.field', $field);
-                })->get();
+                })
+                ->orderBy('project_code')
+                ->get();
             }
         }
-        return view('admin.showOwners')->withOwners($owners ?? Owner::all());
+        return view('admin.showOwners')
+            ->withOwners($owners ?? Owner::orderBy('project_code')->get());
     }
 
     public function create()
     {
-        $classes = Classes::all()->modelKeys();
+        $classes = Classes::orderBy('id')->get();
         return view('admin.createOwner')->withClasses($classes);
     }
 
     public function store(Request $request)
     {
         $input = $request->validate([
-            'class_id' => 'required|exists:classes,id',
+            'class_id' => ['required', 'exists:classes,id'],
             'project_code' => 'required',
             'project_code.*' => [
                 'required',
                 'distinct',
                 'max:20',
-                Rule::unique('owners', 'project_code')->where(function ($query) {
-                    return $query->where('season_id', Config::get('const.seasonId'));
-                })
+                'regex:/^[0-9]{2}$/'
             ]
         ]);
+
+        $class = Classes::find($input['class_id']);
+        $fields = Config::get('const.fields');
+        if($class->field === $fields['IT']) {
+            $prefix = 'I';
+        } else if ($class->field === $fields['WEB']) {
+            $prefix = 'W';
+        } else {
+            $prefix = 'G';
+        }
+
+        $projectCodes = array_map(function($projectCode) use($prefix) {
+            return $prefix . $projectCode;
+        }, $input['project_code']);
+
+        
+        $duplicatedCodes = Owner::whereIn('project_code', $projectCodes)->pluck('project_code')->all();
+        if(count($duplicatedCodes)) {
+            return back()->withErrors(array_map(function($code) {
+                return $code . 'は既に存在します';
+            }, $duplicatedCodes))->withInput();
+        }
 
         $owners = array_map(function($projectCode) use($input) {
             return [
@@ -64,7 +87,7 @@ class OwnerController extends Controller
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ];
-        }, $input['project_code']);
+        }, $projectCodes);
 
         Owner::insert($owners);
 
