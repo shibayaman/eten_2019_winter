@@ -55,18 +55,18 @@
                 <form action="{{ route('projects.index') }}" method="get" id="filter-form">
                     <input type="hidden" name="field" value="{{ $field }}">
                     <select name="filter" id="filter">
-                        <option value="サンプル" selected>選択してください</option>
+                        <option value="サンプル">選択してください</option>
                         <optgroup label="学年から選ぶ">
-                            <option value="1">1年生</option>
-                            <option value="2">2年生</option>
-                            <option value="3">3年生</option>
-                            <option value="4">4年生</option>
+                            <option value="1" {{ request()->query('filter') == 1 ? 'selected' : '' }}>1年生</option>
+                            <option value="2" {{ request()->query('filter') == 2 ? 'selected' : '' }}>2年生</option>
+                            <option value="3" {{ request()->query('filter') == 3 ? 'selected' : '' }}>3年生</option>
+                            <option value="4" {{ request()->query('filter') == 4 ? 'selected' : '' }}>4年生</option>
                         </optgroup>
                         <optgroup label="卒業年次から選ぶ">
-                            <option value="2020">21年3月卒業</option>
-                            <option value="2021">22年3月卒業</option>
-                            <option value="2022">23年3月卒業</option>
-                            <option value="2023">24年3月卒業</option>
+                            <option value="20" {{ request()->query('filter') == 20 ? 'selected' : '' }}>20年3月卒業</option>
+                            <option value="21" {{ request()->query('filter') == 21 ? 'selected' : '' }}>21年3月卒業</option>
+                            <option value="22" {{ request()->query('filter') == 22 ? 'selected' : '' }}>22年3月卒業</option>
+                            <option value="23" {{ request()->query('filter') == 23 ? 'selected' : '' }}>23年3月卒業</option>
                         </optgroup>
                     </select>
                 </form>

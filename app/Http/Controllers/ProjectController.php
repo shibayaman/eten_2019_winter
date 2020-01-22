@@ -36,8 +36,9 @@ class ProjectController extends Controller
 
         $conditions['classes.field'] = $field;
 
-        $graduation_year = array(2020,2021,2022,2023);
-        $grade = array(1,2,3,4);
+        //FIX ME: graduation_year決め打ちだけど来年になると変えなきゃいけない。Configから取ってくるようにするべきだと思う。
+        $graduation_year = array(20, 21, 22, 23);
+        $grade = array(1, 2, 3, 4);
 
         if($request->has('filter')){
             if(in_array($request->query('filter'), $graduation_year)){
