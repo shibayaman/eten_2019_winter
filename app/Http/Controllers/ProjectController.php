@@ -10,6 +10,7 @@ use Config;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProjectController extends Controller
 {
@@ -67,7 +68,16 @@ class ProjectController extends Controller
     }
 
     public function confirm(Request $request){
-        $imagePath = basename($request->file('image')->store('public/image'));
+        $request->validate([
+            'image' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $fullpath = $request->file('image')->store('public/image');
+        $imagePath = basename($fullpath);
+        $width = 800;
+        $height = 450;
+        $image = Image::make($fullpath)->fit($width, $height)->save($fullpath);
+
         $project = $request->except('image');
         $project['member'] = array_filter($project['member'], 'strlen');
 
