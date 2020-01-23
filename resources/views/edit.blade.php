@@ -41,7 +41,7 @@
 					<div class="field-body">
 						<div class="field" id="titlefield">
 							<div class="control">
-								<input class="input column is-half" type="text" id="title" name="title" placeholder="作品名を入力してください" maxlength="24" value="{{ $owner->project->project_name }}">
+								<input class="input column is-half" type="text" id="title" name="title" placeholder="作品名を入力してください" maxlength="24" value="{{ $owner->project->product_name }}">
 							</div>
 						</div>
 					</div>
@@ -65,14 +65,23 @@
 					<div class="field-body">
 						<div class="field">
 							<div class="control">
-								<textarea class="textarea" placeholder="作品の詳細を書いてください" id="detail" name="detail" maxlength="300" rows="5" value="{{ $owner->project->description }}"></textarea>
+								<textarea class="textarea" placeholder="作品の詳細を書いてください" id="detail" name="detail" maxlength="300" rows="5">{{ $owner->project->description }}</textarea>
 							</div>
 						</div>
 					</div>
 				</div>
+        <div class="field is-horizontal">
+					<div class="field-label">
+            <label class="label">※画像</label>
+					</div>
+					<div class="field-body">
+            <div class="field">
+              <img src="{{ asset('storage/image/' . $owner->project->image_path) }}" alt="作品画像">
+            </div>
+					</div>
+				</div>
 				<div class="field is-horizontal">
 					<div class="field-label is-normal">
-						<label class="label">※画像</label>
 					</div>
 					<div class="field-body">
 						<div class="field">
@@ -99,7 +108,7 @@
 						<div class="field-body">
 							<div class="field has-addons">
 								<p class="control">
-									<input class="input" type="number"  id="period" name="period" placeholder="0" min="1" maxlength="10" value="{{ $owner->project->production_time }}">
+                    <input class="input" type="number"  id="period" name="period" placeholder="0" min="1" maxlength="10" value="{{ $time_num }}">
 								</p>
 								<p class="control">
 									<span class="select" id="time_tag">
@@ -120,7 +129,7 @@
 					<div class="field-body">
 						<div class="field">
 							<div class="control has-icons-left has-icons-right">
-								<input class="input column is-half" type="text" id="represent" name="represent" placeholder="代表者の名前を入力してください" maxlength="30">
+								<input class="input column is-half" type="text" id="represent" name="represent" value="{{ $owner->project->leader_name }}" placeholder="代表者の名前を入力してください" maxlength="30">
 								<span class="icon is-small is-left">
 									<i class="fas fa-user"></i>
 								</span>
@@ -135,7 +144,7 @@
 					<div class="field-body">
 						<div class="field">
 							<div class="control">
-								<input class="input column is-half" type="text" id="team" name="team" placeholder="チーム名を入力してください">
+								<input class="input column is-half" type="text" id="team" name="team" value="{{ $owner->project->team_name }}" placeholder="チーム名を入力してください">
 							</div>
 						</div>
 					</div>
@@ -148,7 +157,7 @@
 						<div class="field-body">
 							<div class="field">
 								<div class="control has-icons-left has-icons-right">
-									<input class="input column is-half" type="text" id="member0" name="member[]" placeholder="代表者以外のメンバーの名前を入力してください">
+									<input class="input column is-half" type="text" id="member0" name="member[]" value="{{$member_array[0]}}" placeholder="代表者以外のメンバーの名前を入力してください">
 									<span class="icon is-small is-left">
 										<i class="fas fa-user"></i>
 									</span>
@@ -175,16 +184,16 @@
 							<div class="control">
 								<div class="select">
 									<select id="genre" name="genre">
-										@if($class === "IT")
-											<option>モバイルアプリ</option>
-											<option>PCアプリケーション</option>
-											<option>Webアプリケーション</option>
+										@if($owner->class_id === "IT")
+											<option {{ strpos($owner->project->genre, 'モバイルアプリ') ? 'selected' : '' }}>モバイルアプリ</option>
+											<option {{ strpos($owner->project->genre, 'PCアプリケーション') ? 'selected' : '' }}>PCアプリケーション</option>
+											<option {{ strpos($owner->project->genre, 'WEBアプリケーション') ? 'selected' : '' }}>Webアプリケーション</option>
 											<option>ゲーム</option>
-										@elseif($class === "Web")
-											<option>Webサイト</option>
-											<option>Webアプリケーション</option>
+										@elseif($owner->class_id === "Web")
+											<option {{ strpos($owner->project->genre, 'Webサイト') ? 'selected' : '' }}>Webサイト</option>
+											<option {{ strpos($owner->project->genre, 'Webアプリケーション') ? 'selected' : '' }}>Webアプリケーション</option>
 										@else
-											<option>グラフィック</option>
+											<option {{ strpos($owner->project->genre, 'グラフィック') ? 'selected' : '' }}>グラフィック</option>
 										@endif
 										<option id="other">その他</option>
 									</select>
@@ -208,6 +217,6 @@
 				</div>
 			</div>
 		</form>
-    	<script src="{{ asset('js/registration.js') }}"></script>
+    	<script src="{{ asset('js/edit.js') }}"></script>
     </body>
 </html>

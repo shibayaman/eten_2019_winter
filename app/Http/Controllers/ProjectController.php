@@ -17,7 +17,7 @@ class ProjectController extends Controller
 {
     public function __construct() {
         $this->middleware('auth')->except([
-            'index', 'show' 
+            'index', 'show'
         ]);
 
         $this->middleware('checkProject')->only([
@@ -78,7 +78,7 @@ class ProjectController extends Controller
 
         $width = 800;
         $height = 450;
-       
+
         $imagePath = Str::random(40) . '.' . $extension;
         Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
 
@@ -141,8 +141,14 @@ class ProjectController extends Controller
     //editはまだ未実装
     public function edit()
     {
-        dd('まだ実装してません。ごめんなちゃい');
-        return view('edit')->withOwner(Auth::user());
+        // dd('まだ実装してません。ごめんなちゃい');
+        $owner = Auth::user();
+        $time = $owner->project->production_time;
+        $time_num = preg_replace("<[^0-9]+>", "", $time);
+        $member = $owner->project->team_member;
+        $member_array = preg_split("</,/>", $member);;
+
+        return view('edit', compact('owner', 'time_num', 'member_array'));
     }
 
     //updateもまだ未実装
