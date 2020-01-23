@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('product_name', 100);
             $table->string('catchphrase', 50);
             $table->string('description', 300);
-            $table->string('image_path', 150);
+            $table->string('image_path', 150)->nullable();
             $table->string('production_time', 15);
             $table->string('leader_name', 30);
             $table->string('team_name', 30);
