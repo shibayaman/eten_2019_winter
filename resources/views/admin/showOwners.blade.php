@@ -7,6 +7,12 @@
 @endsection
 
 @section('content')
+<div class="field no-print">
+    <div class="control">
+        <a class="button" href="{{ route('admin.home') }}">戻る</a>
+    </div>
+</div>
+
 <table class="table is-striped is-fullwidth">
     <thead>
         <th>作品コード</th>

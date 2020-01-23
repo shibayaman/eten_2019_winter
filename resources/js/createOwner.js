@@ -11,14 +11,21 @@ $(() => {
 					$('<button>', {type: 'button', class: 'delete'})
 				),
 				$('<div>', {class: 'field-body'}).append(
-					$('<div>', {class: 'field'}).append(
-						$('<div>', {class: 'control'}).append(
-							$('<input>', {
-								type: 'text',
-								class: 'input column is-half',
-								name: 'project_code[]',
-								placeholder: '作品コード'
-							})
+					$('<div>', {class: 'field isexpanded'}).append(
+						$('<div>', {class: 'field has-addons'}).append(
+							$('<p>', {class: 'control'}).append(
+								$('<a>', {class: 'button is-static project-code-prefix'}).append(
+									getPrefix()
+								)
+							),
+							$('<p>', {class: 'control is-expanded'}).append(
+								$('<input>', {
+									type: 'text',
+									class: 'input column is-half',
+									name: 'project_code[]',
+									placeholder: '作品コード'
+								})
+							)
 						)
 					)
 				)
@@ -47,8 +54,12 @@ $(() => {
 		return isFilled;
 	});
 
-	$(document).on("keydown", 'input', (e) => {
-		if ((e.key && e.key === 'Enter') || (e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+	$('#class-select').on('change', (event) => {
+		showPrefix(getPrefix());
+	});
+
+	$(document).on('keydown', 'input', (event) => {
+		if ((event.key && event.key === 'Enter') || (event.which && event.which === 13) || (event.keyCode && event.keyCode === 13)) {
 			return false;
 		}
 	});
@@ -57,4 +68,23 @@ $(() => {
 		$(event.target).closest('.project-code-field').remove();
 		$('.help-max-40').hide();
 	});
+	
+	const showPrefix = (prefix) => {
+		$('.project-code-prefix').html(prefix);
+	};
+
+	const getPrefix = () => {
+		const code = $('#class-select option:selected').data('code');
+		if(code === 'IT') {
+			return 'I';
+		}
+		else if (code === 'Web') {
+			return 'W';
+		}
+		else {
+			return 'G';
+		}
+	};
+
+	showPrefix(getPrefix());
 });
