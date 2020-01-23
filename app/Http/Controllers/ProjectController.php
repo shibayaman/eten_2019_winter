@@ -70,18 +70,22 @@ class ProjectController extends Controller
 
     public function confirm(Request $request){
         $request->validate([
-            'image' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $image = $request->file('image');
-        $extension = $image->getClientOriginalExtension();
+        if(isset($request->image)) {
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
 
-        $width = 800;
-        $height = 450;
-       
-        $imagePath = Str::random(40) . '.' . $extension;
-        Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
-
+            $width = 800;
+            $height = 450;
+        
+            $imagePath = Str::random(40) . '.' . $extension;
+            Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
+        } else {
+            $imagePath = null;
+        }
+        
         $project = $request->except('image');
         $project['member'] = array_filter($project['member'], 'strlen');
 
@@ -106,7 +110,7 @@ class ProjectController extends Controller
             'title' => 'required|max:24',
             'catch_copy' => 'required|max:40',
             'detail' => 'required|max:300',
-            'image' => 'required|max:150',
+            'image' => 'nullable|max:150',
             'period' => 'required|max:15',
             'represent' => 'required|max:30',
             'team' => 'required|max:30',
