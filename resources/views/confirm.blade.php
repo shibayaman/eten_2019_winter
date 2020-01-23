@@ -14,10 +14,10 @@
       <div class="field">
         <div class="columns">
           <div class="column is-offset-3">
-            <label class="label is-large">作品コード : {{ $project['project_code'] }}</label>
+            <label class="label is-large">作品コード : {{ Auth::user()->project_code }}</label>
           </div>
           <div class="column">
-            <label class="label is-large">クラス名 : {{ $project['class_id'] }} </label>
+            <label class="label is-large">クラス名 : {{ Auth::user()->class_id }} </label>
           </div>
         </div>
       </div>

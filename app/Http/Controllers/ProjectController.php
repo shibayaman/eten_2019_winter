@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as Image;
+use Str;
 
 class ProjectController extends Controller
 {
@@ -72,11 +73,14 @@ class ProjectController extends Controller
             'image' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $fullpath = $request->file('image')->store('public/image');
-        $imagePath = basename($fullpath);
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
+
         $width = 800;
         $height = 450;
-        $image = Image::make($fullpath)->fit($width, $height)->save($fullpath);
+       
+        $imagePath = Str::random(40) . '.' . $extension;
+        Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
 
         $project = $request->except('image');
         $project['member'] = array_filter($project['member'], 'strlen');
@@ -92,11 +96,13 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        if(Auth::user()->project()->exists()){
+            return redirect()->route('projects.edit');
+        }
+
         $ownerId = Auth::id();
 
-        //todo add unique validation for project
-        $validator = Validator::make(array_merge($request->all(), ['id' => $ownerId]), [
-            'id' => 'required|max:20',
+        $validator = Validator::make($request->all(), [
             'title' => 'required|max:24',
             'catch_copy' => 'required|max:40',
             'detail' => 'required|max:300',
