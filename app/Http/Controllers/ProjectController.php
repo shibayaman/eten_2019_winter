@@ -133,7 +133,7 @@ class ProjectController extends Controller
         $project->owner_id = $ownerId;
         $project->save();
 
-        return view('/completion');
+        return view('/completion',compact('project'));
     }
 
     public function show(Project $project)
