@@ -25,7 +25,7 @@
         <div class="columns is-desktop">
             <div class="column is-5">
                 <figure class="image is-16by9">
-                <img src="{{ asset('storage/image/' . $imagePath) }}" alt="作品の画像">
+                <img src="{{ asset('storage/image/' . ($imagePath ?? 'noimage.jpg')) }}" alt="作品の画像">
                 </figure>
             </div>            
             <div class="column">
