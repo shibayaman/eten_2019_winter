@@ -7,6 +7,7 @@
 {{-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> --}}
 @endsection
 
+<body>
 @section('content')
 <form id="create_owner_form" action="{{ route('owners.store') }}" method="post">
     @csrf
@@ -101,3 +102,4 @@
 @section('scripts')
 <script src="{{ asset('js/createOwner.js') }}"></script>
 @endsection
+</body>

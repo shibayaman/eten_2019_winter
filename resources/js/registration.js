@@ -48,11 +48,6 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
     }
   });
 
-  $("#image").on("change", function(){
-    if($(this).val() != ""){
-      $("#file-name").css("border-color", "hsl(0, 0%, 86%)");
-    }
-  });
 
   $("#period").on("blur", function(){
     if($(this).val() != ""){
@@ -119,10 +114,6 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
       submitflg = false;
     }
 
-    if($("#image").val() == ""){
-      $("#file-name").css("border-color", "hsl(348, 86%, 61%)");
-      submitflg = false;
-    }
     if($("#period").val() == ""){
       $("#period").removeClass().addClass("input is-danger");
       submitflg = false;
