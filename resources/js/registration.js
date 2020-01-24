@@ -25,7 +25,6 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
                               + '</div>'
                               + '</div>'
                               + '</div>');
-      console.log($(`#member${count}`).val());
     }
   });
 
@@ -128,6 +127,12 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
       submitflg = false;
     }
 
+    if(!$("#genre").val()){
+      $("#ganreselect").removeClass().addClass("select is-danger");
+      submitflg = false;
+    }
+
+
     if($("#othergenre").val() == ""){
       $("#othergenre").removeClass().addClass("input column is-half is-danger");
       submitflg = false;
@@ -138,11 +143,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
         $("#other").val($("#othergenre").val());
       }
     }else{
-      // $("#attention-field").append('<div class="container"  >'
-      //                             + '<div class="box content column is-5 is-offset-one-quarter">'
-      //                             + '<label class="label column is-offset-3" style="color:hsl(348, 86%, 61%);font-weight:bold;">必須項目が入力されていません</label>'
-      //                             + '</div>'
-      //                             + '</div>');
+
       $("#attention-field").append('<article class="message is-danger column is-two-thirds" id="attention">'
                                   + '<div class="message-header">'
                                   + '<p>エラー</p>'

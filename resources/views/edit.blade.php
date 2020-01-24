@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ asset('css/registration.css') }}">
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js">
-          var
         </script>
         <title>作品編集</title>
     </head>
@@ -72,11 +71,11 @@
 						</div>
 					</div>
 				</div>
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" id="imagefield">
 					<div class="field-label">
             <label class="label">※画像</label>
 					</div>
-					<div class="field-body">
+					<div class="field-body" >
             <div class="field">
               <img src="{{ asset('storage/image/' . $owner->project->image_path) }}" alt="作品画像">
             </div>
@@ -84,6 +83,7 @@
 				</div>
 				<div class="field is-horizontal">
 					<div class="field-label is-normal">
+            <label class="label" style="display:none" id="imagelabel">※画像</label>
 					</div>
 					<div class="field-body">
 						<div class="field">
@@ -99,8 +99,17 @@
 									<span class="file-name" id="file-name">選択されていません</span>
 								</label>
 							</div>
-							<p class="help">16:9の比率で選択してください</p>
+							<p class="help">16:9の比率で選択してください (.jpeg .png .gif)</p>
 						</div>
+					</div>
+				</div>
+        <div class="field is-horizontal">
+					<div class="field-label">
+					</div>
+					<div class="field-body">
+            <div class="field">
+              <button type="button" class="button is-small" id="deletebutton" style="display:none">キャンセル</button>
+            </div>
 					</div>
 				</div>
 					<div class="field is-horizontal">
@@ -152,21 +161,37 @@
 					</div>
 				</div>
 				<div class="field" id="memberinput">
-					<div class="field is-horizontal">
-						<div class="field-label is-normal">
-							<label class="label">メンバー</label>
-						</div>
-						<div class="field-body">
-							<div class="field">
-								<div class="control has-icons-left has-icons-right">
-									<input class="input column is-half" type="text" id="member0" name="member[]" value="{{$member_array[0]}}" placeholder="代表者以外のメンバーの名前を入力してください">
-									<span class="icon is-small is-left">
-										<i class="fas fa-user"></i>
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">メンバー</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input column is-half" type="text" id="member0" name="member[0]" value="{{$member_array ? $member_array[0] : ""}}" placeholder="代表者以外のメンバーの名前を入力してください">
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+            @for($i = 1; $i < count($member_array); $i++)
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control has-icons-left has-icons-right">
+                      <input class="input column is-half" type="text" id="member{{ $i }}" name="member[{{ $i }}]" value="{{$member_array[$i]}}" placeholder="代表者以外のメンバーの名前を入力してください">
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            @endfor
 				</div>
 				<div class="field is-horizontal">
 					<div class="field-label">
@@ -184,7 +209,7 @@
 					<div class="field-body">
 						<div class="field">
 							<div class="control">
-								<div class="select">
+								<div class="select" id="ganreselect">
 									<select id="genre" name="genre">
                     @foreach ($result_genres as $genre)
                       <option>{{ $genre }}</option>
@@ -223,6 +248,9 @@
 				</div>
 			</div>
 		</form>
+      <script>
+        var count = {{ count($member_array) }};
+      </script>
     	<script src="{{ asset('js/edit.js') }}"></script>
     </body>
 </html>

@@ -1,17 +1,31 @@
-const fileInput = document.querySelector('#file-selector input[type=file]');
-  fileInput.onchange = () => {
-    if (fileInput.files.length > 0) {
-      const fileName = document.querySelector('#file-selector .file-name');
-      fileName.textContent = fileInput.files[0].name;
-    }
-  }
+  const fileName = document.querySelector('#file-selector .file-name');
+  const fileInput = document.querySelector('#file-selector input[type=file]');
 
-  var count = 0;
-  // var memberID;
+    if (fileInput.files.length > 0) {
+
+    }
+
+    fileInput.onchange = () => {
+      if (fileInput.files.length > 0) {
+        fileName.textContent = fileInput.files[0].name;
+        $('#imagefield').hide();
+        $('#imagelabel').show();
+        $('#deletebutton').show();
+      }
+    }
+
+
+  $('#deletebutton').on('click', function(){
+    if (fileInput.files.length > 0) {
+      fileName.textContent = "選択されていません";
+      $('input[type=file]').val('');
+      $('#deletebutton').hide();
+    }
+  });
 
   $('#add_member').on('click', function() {
     // memberID = `member${count}`;
-    if(count <= 10 && $(`#member${count}`).val() != ""){
+    if(count < 10 && $(`#member${count}`).val() != ""){
       count++;
       $('#memberinput').append('<div class="field is-horizontal">'
                               + '<div class="field-label is-normal"></div>'
@@ -26,7 +40,6 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
                               + '</div>'
                               + '</div>'
                               + '</div>');
-      console.log($(`#member${count}`).val());
     }
   });
 
@@ -92,8 +105,6 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
 
   });
 
-
-
   $('#registration_form').on("submit", function() {
     var submitflg = true;
 
@@ -126,6 +137,11 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
 
     if($("#team").val() == ""){
       $("#team").removeClass().addClass("input column is-half is-danger");
+      submitflg = false;
+    }
+
+    if(!$("#genre").val()){
+      $("#ganreselect").removeClass().addClass("select is-danger");
       submitflg = false;
     }
 
