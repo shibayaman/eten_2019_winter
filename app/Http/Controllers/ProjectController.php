@@ -119,7 +119,7 @@ class ProjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('projects.create');
+            return redirect()->route('projects.create')->withErrors($validator);
         }
 
         $project = new Project();
