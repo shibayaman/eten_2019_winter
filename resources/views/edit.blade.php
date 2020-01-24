@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ asset('css/registration.css') }}">
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js">
+          var
+        </script>
         <title>作品編集</title>
     </head>
     <body>
@@ -184,18 +186,22 @@
 							<div class="control">
 								<div class="select">
 									<select id="genre" name="genre">
-										@if($owner->class_id === "IT")
+                    @foreach ($result_genres as $genre)
+                      <option>{{ $genre }}</option>
+                    @endforeach
+										<!-- @if($owner->class->field === $fields["IT"])
 											<option {{ strpos($owner->project->genre, 'モバイルアプリ') ? 'selected' : '' }}>モバイルアプリ</option>
 											<option {{ strpos($owner->project->genre, 'PCアプリケーション') ? 'selected' : '' }}>PCアプリケーション</option>
 											<option {{ strpos($owner->project->genre, 'WEBアプリケーション') ? 'selected' : '' }}>Webアプリケーション</option>
 											<option>ゲーム</option>
-										@elseif($owner->class_id === "Web")
+										@elseif($owner->class->field === $fields["WEB"])
 											<option {{ strpos($owner->project->genre, 'Webサイト') ? 'selected' : '' }}>Webサイト</option>
 											<option {{ strpos($owner->project->genre, 'Webアプリケーション') ? 'selected' : '' }}>Webアプリケーション</option>
-										@else
+										@elseif($owner->class->field === $fields["GRAPHIC"])
 											<option {{ strpos($owner->project->genre, 'グラフィック') ? 'selected' : '' }}>グラフィック</option>
 										@endif
-										<option id="other">その他</option>
+										-->
+                    <option id="other">その他</option>
 									</select>
 								</div>
 							</div>

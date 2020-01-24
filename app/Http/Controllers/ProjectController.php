@@ -70,17 +70,21 @@ class ProjectController extends Controller
 
     public function confirm(Request $request){
         $request->validate([
-            'image' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $image = $request->file('image');
-        $extension = $image->getClientOriginalExtension();
+        if(isset($request->image)) {
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
 
-        $width = 800;
-        $height = 450;
+            $width = 800;
+            $height = 450;
 
-        $imagePath = Str::random(40) . '.' . $extension;
-        Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
+            $imagePath = Str::random(40) . '.' . $extension;
+            Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
+        } else {
+            $imagePath = null;
+        }
 
         $project = $request->except('image');
         $project['member'] = array_filter($project['member'], 'strlen');
@@ -96,15 +100,17 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        if(Auth::user()->project()->exists()){
+            return redirect()->route('projects.edit');
+        }
+
         $ownerId = Auth::id();
 
-        //todo add unique validation for project
-        $validator = Validator::make(array_merge($request->all(), ['id' => $ownerId]), [
-            'id' => 'required|max:20',
+        $validator = Validator::make($request->all(), [
             'title' => 'required|max:24',
             'catch_copy' => 'required|max:40',
             'detail' => 'required|max:300',
-            'image' => 'required|max:150',
+            'image' => 'nullable|max:150',
             'period' => 'required|max:15',
             'represent' => 'required|max:30',
             'team' => 'required|max:30',
@@ -129,7 +135,7 @@ class ProjectController extends Controller
         $project->owner_id = $ownerId;
         $project->save();
 
-        return view('/completion');
+        return view('/completion',compact('project'));
     }
 
     public function show(Project $project)
@@ -141,54 +147,65 @@ class ProjectController extends Controller
     //editはまだ未実装
     public function edit()
     {
-        // dd('まだ実装してません。ごめんなちゃい');
+        $fields = Config::get('const.fields');
         $owner = Auth::user();
         $time = $owner->project->production_time;
         $time_num = preg_replace("<[^0-9]+>", "", $time);
         $member = $owner->project->team_member;
-        $member_array = preg_split("</,/>", $member);;
+        $member_array = preg_split("<,>", $member);
+        $registered_genre = [$owner->project->genre];
 
-        return view('edit', compact('owner', 'time_num', 'member_array'));
+        if($owner->class->field === $fields["IT"]){
+          $genre_array = ["モバイルアプリ", "PCアプリケーション", "Webアプリケーション"];
+        }elseif ($owner->class->field === $fields["WEB"]) {
+
+        }elseif ($owner->class->field === $fields["GRAPHIC"]) {
+
+        }
+
+        $result_genres = array_merge($registered_genre, $genre_array);
+
+        return view('edit', compact('owner', 'time_num', 'member_array', 'fields', 'result_genres'));
     }
 
     //updateもまだ未実装
     public function update(Request $request, $id)
     {
-        dd('まだ何も送らないでね');
-        $owner = Auth::user()->only('id');
-        $validator = Validator::make(array_merge($request->all(), $owner), [
-            'id' => 'required|max:20',
-            'title' => 'required|max:24',
-            'catch_copy' => 'required|max:40',
-            'detail' => 'required|max:300',
-            'image' => 'required|max:150',
-            'period' => 'required|max:15',
-            'represent' => 'required|max:30',
-            'team' => 'required|max:30',
-            'member' => 'max:120',
-            'genre' => 'required',
-        ]);
+        return view('commingsoon');
+        // $owner = Auth::user()->only('id');
+        // $validator = Validator::make(array_merge($request->all(), $owner), [
+        //     'id' => 'required|max:20',
+        //     'title' => 'required|max:24',
+        //     'catch_copy' => 'required|max:40',
+        //     'detail' => 'required|max:300',
+        //     'image' => 'required|max:150',
+        //     'period' => 'required|max:15',
+        //     'represent' => 'required|max:30',
+        //     'team' => 'required|max:30',
+        //     'member' => 'max:120',
+        //     'genre' => 'required',
+        // ]);
 
-        if ($validator->fails()) {
-            return view('registration');
-        }
+        // if ($validator->fails()) {
+        //     return view('registration');
+        // }
 
-        $proid = Auth::user()->project->id;
+        // $proid = Auth::user()->project->id;
 
-        $project = project::where('id', proid) -> get();
-        $project->product_name = $request->title;
-        $project->catchphrase = $request->catch_copy;
-        $project->description = $request->detail;
-        $project->image_path = $request->image;
-        $project->production_time = $request->period;
-        $project->leader_name = $request->represent;
-        $project->team_name = $request->team;
-        $project->team_member = $request->member;
-        $project->genre = $request->genre;
-        //$project->owner_id = $owner['id'];
-        $project->save();
+        // $project = project::where('id', proid) -> get();
+        // $project->product_name = $request->title;
+        // $project->catchphrase = $request->catch_copy;
+        // $project->description = $request->detail;
+        // $project->image_path = $request->image;
+        // $project->production_time = $request->period;
+        // $project->leader_name = $request->represent;
+        // $project->team_name = $request->team;
+        // $project->team_member = $request->member;
+        // $project->genre = $request->genre;
+        // //$project->owner_id = $owner['id'];
+        // $project->save();
 
-        return view('/completion');
+        // return view('/completion');
     }
 
     public function destroy($id)

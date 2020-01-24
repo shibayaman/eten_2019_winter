@@ -7,7 +7,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
   }
 
   var count = 0;
-  
+
   $('#add_member').on('click', function() {
     // memberID = `member${count}`;
     if(count <= 10 && $(`#member${count}`).val() != ""){
@@ -17,7 +17,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
                               + '<div class="field-body">'
                               + '<div class="field">'
                               + '<div class="control has-icons-left has-icons-right">'
-                              + `<input class="input column is-half" type="text" id="member${count}" name="member[]" maxlength="30" value="{{$member_array[${count}]}}" placeholder="代表者以外のメンバーの名前を入力してください">`
+                              + `<input class="input column is-half" type="text" id="member${count}" name="member[]" maxlength="30" placeholder="代表者以外のメンバーの名前を入力してください">`
                               + '<span class="icon is-small is-left">'
                               + '<i class="fas fa-user"></i>'
                               + '</span>'

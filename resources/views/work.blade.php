@@ -41,7 +41,7 @@
                 <h2 class="sideber_sub_ttl">展示作品一覧</h2>
             </div>
             <nav id="nav">
-                <ul>
+                {{-- <ul>
                     @if($project->owner->class->field === "IT")
                         <li><a class="nav_select_it" href="{{ route('projects.index', ['field' => $fields['IT']]) }}">IT</a></li>
                         <li><a href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
@@ -55,7 +55,7 @@
                         <li><a href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
                         <li><a class="nav_select_design" href="{{ route('projects.index', ['field' => $fields['GRAPHIC']]) }}">GRAPHIC</a></li>
                     @endif
-                </ul>
+                </ul> --}}
             </nav>
         </div>
     </header>
@@ -70,7 +70,7 @@
                 <h4 class="work_name">{{$project->product_name}}</h4>
             </div>
             <div class="work_img_table_wrap">
-                <p class="work_img"><img src="{{ asset('storage/image/' . $project->image_path) }}" alt="作品画像"></p>
+                <p class="work_img"><img src="{{ asset('storage/image/' . ($project->image_path ?? 'noimage.jpg')) }}" alt="作品画像"></p>
                 @if($project->owner->class->field === $fields['IT'])
                     <table class="work_select_it work_ex">
                 @else
@@ -110,11 +110,11 @@
                 </tr>
             </table>
         </div>
-        <div class="pagination">
-            <a href="">前へ</a>
-            <a class="return" href="{{ route('projects.index', ['field' => 'IT']) }}">戻る</a>
-            <a href="">次へ</a>
-        </div>
+        {{-- <div class="pagination">
+            <a>前へ</a>
+            <a class="return">戻る</a>
+            <a>次へ</a>
+        </div> --}}
     </main>
 </body>
 </html>
