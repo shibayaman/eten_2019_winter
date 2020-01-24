@@ -191,8 +191,10 @@ class ProjectController extends Controller
         // return view('/completion');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        Project::destroy($id);
+        //idk return view('project')? No default route or something...
+        return "Done";
     }
 }
