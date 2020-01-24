@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-<body>
 	<div class="field">
 	  <div class="column is-three-fifths is-offset-5">
 	      <h1 class="title">管理者用ログイン画面</h1>
@@ -52,6 +51,4 @@
 
 		</div>
 	</form>
-
 @endsection
-</body>

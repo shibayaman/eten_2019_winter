@@ -147,14 +147,14 @@ class ProjectController extends Controller
     //editはまだ未実装
     public function edit()
     {
-        return view('commingsoon');
+        return view('commingsoon')->withId(Auth::user()->project->id);
         // return view('edit')->withOwner(Auth::user());
     }
 
     //updateもまだ未実装
     public function update(Request $request, $id)
     {
-        return view('commingsoon');
+        return view('commingsoon')->withId(Auth::user()->project->id);
         // $owner = Auth::user()->only('id');
         // $validator = Validator::make(array_merge($request->all(), $owner), [
         //     'id' => 'required|max:20',
