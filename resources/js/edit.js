@@ -1,16 +1,31 @@
-const fileInput = document.querySelector('#file-selector input[type=file]');
-  fileInput.onchange = () => {
-    if (fileInput.files.length > 0) {
-      const fileName = document.querySelector('#file-selector .file-name');
-      fileName.textContent = fileInput.files[0].name;
-    }
-  }
+  const fileName = document.querySelector('#file-selector .file-name');
+  const fileInput = document.querySelector('#file-selector input[type=file]');
 
-  var count = 0;
+    if (fileInput.files.length > 0) {
+
+    }
+
+    fileInput.onchange = () => {
+      if (fileInput.files.length > 0) {
+        fileName.textContent = fileInput.files[0].name;
+        $('#imagefield').hide();
+        $('#imagelabel').show();
+        $('#deletebutton').show();
+      }
+    }
+
+
+  $('#deletebutton').on('click', function(){
+    if (fileInput.files.length > 0) {
+      fileName.textContent = "選択されていません";
+      $('input[type=file]').val('');
+      $('#deletebutton').hide();
+    }
+  });
 
   $('#add_member').on('click', function() {
     // memberID = `member${count}`;
-    if(count <= 10 && $(`#member${count}`).val() != ""){
+    if(count < 10 && $(`#member${count}`).val() != ""){
       count++;
       $('#memberinput').append('<div class="field is-horizontal">'
                               + '<div class="field-label is-normal"></div>'
@@ -90,8 +105,6 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
 
   });
 
-
-
   $('#registration_form').on("submit", function() {
     var submitflg = true;
 
@@ -132,7 +145,6 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
       submitflg = false;
     }
 
-
     if($("#othergenre").val() == ""){
       $("#othergenre").removeClass().addClass("input column is-half is-danger");
       submitflg = false;
@@ -143,7 +155,20 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
         $("#other").val($("#othergenre").val());
       }
     }else{
-      $("#attention-field").append('<p class="help is-danger">未入力の項目があります</p>');
+      // $("#attention-field").append('<div class="container"  >'
+      //                             + '<div class="box content column is-5 is-offset-one-quarter">'
+      //                             + '<label class="label column is-offset-3" style="color:hsl(348, 86%, 61%);font-weight:bold;">必須項目が入力されていません</label>'
+      //                             + '</div>'
+      //                             + '</div>');
+      $("#attention-field").append('<article class="message is-danger column is-two-thirds" id="attention">'
+                                  + '<div class="message-header">'
+                                  + '<p>エラー</p>'
+                                  + '</div>'
+                                  + '<div class="message-body">'
+                                  + '<label class="label column is-offset-4" style="color:hsl(348, 86%, 61%);font-weight:bold;">必須項目が入力されていません</label>'
+                                  + '</div>'
+                                  + '</article>');
     }
+
     return submitflg;
   });

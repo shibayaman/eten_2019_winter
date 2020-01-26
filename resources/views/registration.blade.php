@@ -95,7 +95,7 @@
 									<span class="file-name" id="file-name">選択されていません</span>
 								</label>
 							</div>
-							<p class="help">16:9の比率で選択してください</p>
+							<p class="help">16:9の比率で選択してください (.jpeg .png .gif)</p>
 						</div>
 					</div>
 				</div>
@@ -180,7 +180,7 @@
 					<div class="field-body">
 						<div class="field">
 							<div class="control">
-								<div class="select">
+								<div class="select" id="ganreselect">
 									<select id="genre" name="genre">
 										@if($class === "IT")
 											<option>モバイルアプリ</option>

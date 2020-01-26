@@ -17,7 +17,7 @@ class ProjectController extends Controller
 {
     public function __construct() {
         $this->middleware('auth')->except([
-            'index', 'show' 
+            'index', 'show'
         ]);
 
         $this->middleware('checkProject')->only([
@@ -79,13 +79,13 @@ class ProjectController extends Controller
 
             $width = 800;
             $height = 450;
-        
+
             $imagePath = Str::random(40) . '.' . $extension;
             Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
         } else {
             $imagePath = null;
         }
-        
+
         $project = $request->except('image');
         $project['member'] = array_filter($project['member'], 'strlen');
 
@@ -148,7 +148,33 @@ class ProjectController extends Controller
     public function edit()
     {
         return view('commingsoon')->withId(Auth::user()->project->id);
-        // return view('edit')->withOwner(Auth::user());
+      
+        $fields = Config::get('const.fields');
+        $owner = Auth::user();
+        $time = $owner->project->production_time;
+        $time_num = preg_replace("<[^0-9]+>", "", $time);
+        $member = $owner->project->team_member;
+        $member_array = explode(",", $member);
+
+
+        $member_array = array_filter($member_array, function($value){
+          return trim($value);
+        });
+        $registered_genre = [$owner->project->genre];
+
+        if($owner->class->field === $fields["IT"]){
+          $genre_array = ["モバイルアプリ", "PCアプリケーション", "Webアプリケーション"];
+        }elseif ($owner->class->field === $fields["WEB"]) {
+          $genre_array = ["Webサイト", "Webアプリケーション"];
+        }elseif ($owner->class->field === $fields["GRAPHIC"]) {
+          $genre_array = ["グラフィック"];
+        }
+
+        $result_genres = array_merge($registered_genre, $genre_array);
+        $result_genres = array_unique($result_genres);
+        $result_genres = array_values($result_genres);
+      
+        return view('edit', compact('owner', 'time_num', 'member_array', 'fields', 'result_genres'));
     }
 
     //updateもまだ未実装
