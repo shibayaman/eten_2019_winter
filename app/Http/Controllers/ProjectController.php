@@ -119,7 +119,7 @@ class ProjectController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('projects.create');
+            return redirect()->route('projects.create')->withErrors($validator);
         }
 
         $project = new Project();
@@ -147,6 +147,8 @@ class ProjectController extends Controller
     //editはまだ未実装
     public function edit()
     {
+        return view('commingsoon')->withId(Auth::user()->project->id);
+      
         $fields = Config::get('const.fields');
         $owner = Auth::user();
         $time = $owner->project->production_time;
@@ -171,14 +173,14 @@ class ProjectController extends Controller
         $result_genres = array_merge($registered_genre, $genre_array);
         $result_genres = array_unique($result_genres);
         $result_genres = array_values($result_genres);
-
+      
         return view('edit', compact('owner', 'time_num', 'member_array', 'fields', 'result_genres'));
     }
 
     //updateもまだ未実装
     public function update(Request $request, $id)
     {
-        return view('commingsoon');
+        return view('commingsoon')->withId(Auth::user()->project->id);
         // $owner = Auth::user()->only('id');
         // $validator = Validator::make(array_merge($request->all(), $owner), [
         //     'id' => 'required|max:20',
@@ -215,8 +217,10 @@ class ProjectController extends Controller
         // return view('/completion');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        return "I'm hoping someone would implement me some time in the future...";
+        Project::destroy($id);
+        //idk return view('project')? No default route or something...
+        return "Done";
     }
 }

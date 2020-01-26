@@ -12,7 +12,6 @@
         <a class="button" href="{{ route('admin.home') }}">戻る</a>
     </div>
 </div>
-
 <table class="table is-striped is-fullwidth">
     <thead>
         <th>作品コード</th>

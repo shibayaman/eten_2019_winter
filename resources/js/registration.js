@@ -143,16 +143,7 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
         $("#other").val($("#othergenre").val());
       }
     }else{
-
-      $("#attention-field").append('<article class="message is-danger column is-two-thirds" id="attention">'
-                                  + '<div class="message-header">'
-                                  + '<p>エラー</p>'
-                                  + '</div>'
-                                  + '<div class="message-body">'
-                                  + '<label class="label column is-offset-4" style="color:hsl(348, 86%, 61%);font-weight:bold;">必須項目が入力されていません</label>'
-                                  + '</div>'
-                                  + '</article>');
+      $("#attention-field").append('<p class="help is-danger">未入力の項目があります</p>');
     }
-
     return submitflg;
   });

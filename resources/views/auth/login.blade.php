@@ -8,8 +8,6 @@
 @endsection
 
 @section('content')
-<body>
-
 <div class="field">
   <div class="column is-three-fifths is-offset-5">
       <h1 class="title">作品登録ログイン画面</h1>
@@ -70,5 +68,3 @@
   </div>
 </form>
 @endsection
-
-</body>

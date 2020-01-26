@@ -31,10 +31,16 @@
 			</div>
 		</div>
 		<hr>
-		<div class="field column is-offset-3" id="attention-field"></div>
 		<form action="{{Route('projects.confirm')}}" id="registration_form" method="post" enctype="multipart/form-data">
 			@csrf
 			<div class="section column is-offset-2">
+				<div class="column is-half is-offset-one-quarter" id="attention-field">
+					@if($errors->any)
+						@foreach($errors->all() as $error)
+							<p class="help is-danger">{{ $error }}</p>
+						@endforeach
+					@endif
+				</div>
 				<div class="field is-horizontal">
 					<div class="field-label is-normal">
 						<label class="label">※作品名</label>
