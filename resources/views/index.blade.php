@@ -85,7 +85,7 @@
                         <div class="sp_text">
                             <p class="genre_name @if($field === $fields['IT']) genre_it @else genre_design @endif">{{ $project->genre }}</p>
                             <h4 class="work_name">{{ $project->product_name }}</h4>
-                            <p class="work_ex_text">{{ $project->description}}</p>
+                            <p class="work_ex_text">{{ $project->catchphrase }}</p>
                         </div>
                     </a>
                 </div>
