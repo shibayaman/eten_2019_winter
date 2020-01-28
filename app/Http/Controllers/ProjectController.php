@@ -97,7 +97,7 @@ class ProjectController extends Controller
 
         $submitTo = route('projects.store');
 
-        if($project) {
+        if($oldProject) {
             $submitTo = route('projects.update');
         }
 
