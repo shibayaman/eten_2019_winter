@@ -150,12 +150,9 @@ class ProjectController extends Controller
         return view('work', compact('fields', 'project'));
     }
 
-    //editはまだ未実装
     //FIXME: 確認画面から戻ってきた時画像変わってない
     public function edit()
-    {
-        // return view('commingsoon')->withId(Auth::user()->project->id);
-      
+    {      
         $fields = Config::get('const.fields');
         $owner = Auth::user();
         $time = $owner->project->production_time;
@@ -186,7 +183,6 @@ class ProjectController extends Controller
     //TODO: 古い画像は消したい
     public function update(Request $request)
     {
-        // return view('commingsoon')->withId(Auth::user()->project->id);
         $owner = Auth::user();
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:24',

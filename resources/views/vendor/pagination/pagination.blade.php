@@ -26,7 +26,7 @@
         @endif
 
         @if($paginator->hasMorePages())
-            <a class="{{ Request::input('field') === Config::get('const.fields')['IT'] ? 'pagination_select_it' : 'pagination_select_design' }}">{{ $paginator->currentPage() }}</a>
+            <a class="{{ (Request::input('field') === Config::get('const.fields')['WEB'] || Request::input('field') === Config::get('const.fields')['GRAPHIC']) ? 'pagination_select_design' : 'pagination_select_it' }}">{{ $paginator->currentPage() }}</a>
 
             @if($paginator->currentPage() + 1 !== $paginator->lastpage())
                 <a href="{{ $paginator->nextPageUrl() }}">{{ $paginator->currentPage() + 1 }}</a>
@@ -40,7 +40,7 @@
         @if($paginator->hasMorePages())
             <a href={{ $paginator->url($paginator->lastPage()) }}>{{ $paginator->lastPage() }}</a>
         @else
-            <a class="{{ Request::input('field') === Config::get('const.fields')['IT'] ? 'pagination_select_it' : 'pagination_select_design' }}" href={{ $paginator->url($paginator->lastPage()) }}>{{ $paginator->lastPage() }}</a>
+            <a class="{{ (Request::input('field') === Config::get('const.fields')['WEB'] || Request::input('field') === Config::get('const.fields')['GRAPHIC']) ? 'pagination_select_design' : 'pagination_select_it' }}" href={{ $paginator->url($paginator->lastPage()) }}>{{ $paginator->lastPage() }}</a>
         @endif
 
         @if ($paginator->hasMorePages())
