@@ -49,7 +49,7 @@
             </nav>
         </div>
         <div class="header_top">
-            <h3 class="header_top_select_course">●階</h3>
+            <h3 class="header_top_select_course"></h3>
             <div class="header_top_select_wrap">
                 <p>絞り込み</p>
                 <form action="{{ route('projects.index') }}" method="get" id="filter-form">
@@ -79,7 +79,7 @@
                 <div class="work">
                     <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="sp_text_wrap">
                         <div class="work_img_number_wrap">
-                            <p class="work_img"><img src="{{ asset('storage/image/' . $project->image_path) }}" alt="作品画像"></p>
+                            <p class="work_img"><img src="{{ asset('storage/image/' . ($project->image_path ?? 'noimage.jpg')) }}" alt="作品画像"></p>
                             <p class="number_exhibit @if($field === $fields['IT']) number_it @else number_design @endif">{{ $project->owner->project_code }}</p>
                         </div>
                         <div class="sp_text">
@@ -91,7 +91,7 @@
                 </div>
             @endforeach
         </div>
-        {{ $projects->onEachSide(1)->links() }}
+        {{ $projects->appends(request()->input())->links()}}
     </main>
     <script src="{{ asset('js/index.js') }}"></script>
 </body>

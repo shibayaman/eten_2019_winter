@@ -41,7 +41,7 @@
                 <h2 class="sideber_sub_ttl">展示作品一覧</h2>
             </div>
             <nav id="nav">
-                {{-- <ul>
+                <ul>
                     @if($project->owner->class->field === "IT")
                         <li><a class="nav_select_it" href="{{ route('projects.index', ['field' => $fields['IT']]) }}">IT</a></li>
                         <li><a href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
@@ -55,7 +55,7 @@
                         <li><a href="{{ route('projects.index', ['field' => $fields['WEB']]) }}">WEB</a></li>
                         <li><a class="nav_select_design" href="{{ route('projects.index', ['field' => $fields['GRAPHIC']]) }}">GRAPHIC</a></li>
                     @endif
-                </ul> --}}
+                </ul>
             </nav>
         </div>
     </header>
@@ -110,11 +110,11 @@
                 </tr>
             </table>
         </div>
-        {{-- <div class="pagination">
-            <a>前へ</a>
-            <a class="return">戻る</a>
-            <a>次へ</a>
-        </div> --}}
+        <div class="pagination">
+            {{-- <a>前へ</a> --}}
+            <a class="return" onClick="history.back()">戻る</a>
+            {{-- <a>次へ</a> --}}
+        </div>
     </main>
 </body>
 </html>

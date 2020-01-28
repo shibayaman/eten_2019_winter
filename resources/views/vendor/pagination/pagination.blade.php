@@ -16,7 +16,9 @@
         @endif
 
         @if(!$paginator->hasMorePages())
-            <a href="{{ $paginator->url($paginator->currentPage() - 2) }}">{{ $paginator->currentPage() - 2 }}</a>
+            @if($paginator->currentPage() > 2)
+                <a href="{{ $paginator->url($paginator->currentPage() - 2) }}">{{ $paginator->currentPage() - 2 }}</a>
+            @endif
         @endif
 
         @if(!$paginator->onFirstPage())
@@ -24,31 +26,22 @@
         @endif
 
         @if($paginator->hasMorePages())
-            <a class="pagination_select_it">{{ $paginator->currentPage() }}</a>
+            <a class="{{ Request::input('field') === Config::get('const.fields')['IT'] ? 'pagination_select_it' : 'pagination_select_design' }}">{{ $paginator->currentPage() }}</a>
 
             @if($paginator->currentPage() + 1 !== $paginator->lastpage())
                 <a href="{{ $paginator->nextPageUrl() }}">{{ $paginator->currentPage() + 1 }}</a>
             @endif
         @endif
         
-        <a class="pagination_dotted">...</a>
-        <a {{ $paginator->hasMorePages() ? '' : 'class=pagination_select_it' }} href={{ $paginator->url($paginator->lastPage()) }}>{{ $paginator->lastPage() }}</a>
-        
-        {{-- @foreach ($elements as $element)
-            @if (is_string($element))
-                <a class="pagination_dotted">...</a>
-            @endif
+        @if(!($paginator->currentPage() > $paginator->lastpage() - 3))
+            <a class="pagination_dotted">...</a>
+        @endif
 
-            @if (is_array$element))
-                @foreach ($element as $page => $url)
-                    @if ($page == $paginator->currentPage())
-                        <a class="pagination_select_it" href="{{ $url }}">{{ $page }}</a>
-                    @else
-                        <a class="" href="{{ $url }}">{{ $page }}</a>
-                    @endif
-                @endforeach
-            @endif
-        @endforeach --}}
+        @if($paginator->hasMorePages())
+            <a href={{ $paginator->url($paginator->lastPage()) }}>{{ $paginator->lastPage() }}</a>
+        @else
+            <a class="{{ Request::input('field') === Config::get('const.fields')['IT'] ? 'pagination_select_it' : 'pagination_select_design' }}" href={{ $paginator->url($paginator->lastPage()) }}>{{ $paginator->lastPage() }}</a>
+        @endif
 
         @if ($paginator->hasMorePages())
             <a class="" href="{{ $paginator->nextPageUrl() }}">次へ</a>

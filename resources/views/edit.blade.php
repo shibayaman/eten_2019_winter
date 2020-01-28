@@ -31,7 +31,13 @@
 			</div>
 		</div>
 		<hr>
-		<div class="field column is-offset-3" id="attention-field"></div>
+		<div class="column is-half is-offset-one-quarter" id="attention-field">
+            @if($errors->any)
+                @foreach($errors->all() as $error)
+                    <p class="help is-danger">{{ $error }}</p>
+                @endforeach
+            @endif
+        </div>
 		<form action="{{Route('projects.confirm')}}" id="registration_form" method="post" enctype="multipart/form-data">
 			@csrf
 			<div class="section column is-offset-2">
@@ -71,19 +77,19 @@
 						</div>
 					</div>
 				</div>
-        <div class="field is-horizontal" id="imagefield">
+                <div class="field is-horizontal" id="imagefield">
 					<div class="field-label">
-            <label class="label">※画像</label>
+                        <label class="label">※画像</label>
 					</div>
 					<div class="field-body" >
-            <div class="field">
-              <img src="{{ asset('storage/image/' . $owner->project->image_path) }}" alt="作品画像">
-            </div>
+                        <div class="field">
+                            <img src="{{ asset('storage/image/' . $owner->project->image_path) }}" alt="作品画像">
+                        </div>
 					</div>
 				</div>
 				<div class="field is-horizontal">
 					<div class="field-label is-normal">
-            <label class="label" style="display:none" id="imagelabel">※画像</label>
+                        <label class="label" style="display:none" id="imagelabel">※画像</label>
 					</div>
 					<div class="field-body">
 						<div class="field">

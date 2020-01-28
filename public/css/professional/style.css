@@ -39,10 +39,11 @@ main
 /*-------- 作品全体 --------*/
 
 .works_wrap {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .works_wrap::after {
     content: "";
@@ -54,7 +55,7 @@ main
 /*-------- 作品１つ --------*/
 
 .work {
-    width: 320px;
+    width: 30%;
     padding-bottom: 30px;
     margin: 0 5px 40px;
     border-bottom: 1px solid #E0E0E0;
@@ -76,7 +77,7 @@ main
 /*-------- 作品画像 --------*/
 
 .work .work_img img{
-    width: 320px;
+    width: 100%;
     height: auto;
 }
 /*-------- 展示番号 --------*/
@@ -124,13 +125,13 @@ main
 .work .work_name {
     font-size: 1.9rem;
     font-weight: bold;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 /*-------- 詳細テキスト --------*/
 
 .work .work_ex_text {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     letter-spacing: .05rem;
     line-height: 1.6;
     color: #B3B3B3;

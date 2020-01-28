@@ -1,10 +1,6 @@
   const fileName = document.querySelector('#file-selector .file-name');
   const fileInput = document.querySelector('#file-selector input[type=file]');
 
-    if (fileInput.files.length > 0) {
-
-    }
-
     fileInput.onchange = () => {
       if (fileInput.files.length > 0) {
         fileName.textContent = fileInput.files[0].name;
@@ -14,11 +10,12 @@
       }
     }
 
-
   $('#deletebutton').on('click', function(){
     if (fileInput.files.length > 0) {
       fileName.textContent = "選択されていません";
       $('input[type=file]').val('');
+      $('#imagefield').show();
+      $('#imagelabel').hide();
       $('#deletebutton').hide();
     }
   });
@@ -102,7 +99,6 @@
     if($(this).val() != "その他"){
       $("#otherform").remove();
     }
-
   });
 
   $('#registration_form').on("submit", function() {
@@ -155,19 +151,7 @@
         $("#other").val($("#othergenre").val());
       }
     }else{
-      // $("#attention-field").append('<div class="container"  >'
-      //                             + '<div class="box content column is-5 is-offset-one-quarter">'
-      //                             + '<label class="label column is-offset-3" style="color:hsl(348, 86%, 61%);font-weight:bold;">必須項目が入力されていません</label>'
-      //                             + '</div>'
-      //                             + '</div>');
-      $("#attention-field").append('<article class="message is-danger column is-two-thirds" id="attention">'
-                                  + '<div class="message-header">'
-                                  + '<p>エラー</p>'
-                                  + '</div>'
-                                  + '<div class="message-body">'
-                                  + '<label class="label column is-offset-4" style="color:hsl(348, 86%, 61%);font-weight:bold;">必須項目が入力されていません</label>'
-                                  + '</div>'
-                                  + '</article>');
+      $("#attention-field").append('<p class="help is-danger">未入力の項目があります</p>');
     }
 
     return submitflg;

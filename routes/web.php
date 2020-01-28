@@ -14,7 +14,7 @@
 Route::post('projects/confirm', 'ProjectController@confirm')->name('projects.confirm');
 Route::get('projects/edit', 'ProjectController@edit')->name('projects.edit');
 Route::post('projects/update', 'ProjectController@update')->name('projects.update');
-Route::resource('projects', 'ProjectController')->only(['store', 'create', 'show']);
+Route::resource('projects', 'ProjectController')->only(['store', 'create', 'show', 'index']);
 
 Auth::routes([
     'register' => false,
@@ -33,4 +33,4 @@ Route::prefix('admin')->group(function() {
     Route::resource('owners', 'OwnerController')->only(['index', 'create', 'store']);
 });
 
-// Route::fallback('ProjectController@index');
+Route::fallback('ProjectController@index');

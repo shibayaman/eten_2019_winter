@@ -68,10 +68,12 @@ class ProjectController extends Controller
         return view('registration',compact('owner','class'));
     }
 
-    public function confirm(Request $request){
+    public function confirm(Request $request) {
         $request->validate([
             'image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        $oldProject = Auth::user()->project;
 
         if(isset($request->image)) {
             $image = $request->file('image');
@@ -83,7 +85,11 @@ class ProjectController extends Controller
             $imagePath = Str::random(40) . '.' . $extension;
             Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
         } else {
-            $imagePath = null;
+            if($oldProject) {
+                $imagePath = $oldProject->image_path;
+            } else {
+                $imagePath = null;
+            }
         }
 
         $project = $request->except('image');
@@ -91,7 +97,7 @@ class ProjectController extends Controller
 
         $submitTo = route('projects.store');
 
-        if(Auth::user()->project()->exists()){
+        if($project) {
             $submitTo = route('projects.update');
         }
 
@@ -135,7 +141,7 @@ class ProjectController extends Controller
         $project->owner_id = $ownerId;
         $project->save();
 
-        return view('/completion',compact('project'));
+        return view('/completion', compact('project'));
     }
 
     public function show(Project $project)
@@ -145,9 +151,10 @@ class ProjectController extends Controller
     }
 
     //editはまだ未実装
+    //FIXME: 確認画面から戻ってきた時画像変わってない
     public function edit()
     {
-        return view('commingsoon')->withId(Auth::user()->project->id);
+        // return view('commingsoon')->withId(Auth::user()->project->id);
       
         $fields = Config::get('const.fields');
         $owner = Auth::user();
@@ -155,7 +162,6 @@ class ProjectController extends Controller
         $time_num = preg_replace("<[^0-9]+>", "", $time);
         $member = $owner->project->team_member;
         $member_array = explode(",", $member);
-
 
         $member_array = array_filter($member_array, function($value){
           return trim($value);
@@ -177,44 +183,41 @@ class ProjectController extends Controller
         return view('edit', compact('owner', 'time_num', 'member_array', 'fields', 'result_genres'));
     }
 
-    //updateもまだ未実装
-    public function update(Request $request, $id)
+    //TODO: 古い画像は消したい
+    public function update(Request $request)
     {
-        return view('commingsoon')->withId(Auth::user()->project->id);
-        // $owner = Auth::user()->only('id');
-        // $validator = Validator::make(array_merge($request->all(), $owner), [
-        //     'id' => 'required|max:20',
-        //     'title' => 'required|max:24',
-        //     'catch_copy' => 'required|max:40',
-        //     'detail' => 'required|max:300',
-        //     'image' => 'required|max:150',
-        //     'period' => 'required|max:15',
-        //     'represent' => 'required|max:30',
-        //     'team' => 'required|max:30',
-        //     'member' => 'max:120',
-        //     'genre' => 'required',
-        // ]);
+        // return view('commingsoon')->withId(Auth::user()->project->id);
+        $owner = Auth::user();
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|max:24',
+            'catch_copy' => 'required|max:40',
+            'detail' => 'required|max:300',
+            'image' => 'nullable|max:150',
+            'period' => 'required|max:15',
+            'represent' => 'required|max:30',
+            'team' => 'required|max:30',
+            'member' => 'max:120',
+            'genre' => 'required',
+        ]);
 
-        // if ($validator->fails()) {
-        //     return view('registration');
-        // }
+        if ($validator->fails()) {
+            return view('edit')->withErrors($validator);
+        }
 
-        // $proid = Auth::user()->project->id;
+        $project = $owner->project;
+        $project->product_name = $request->title;
+        $project->catchphrase = $request->catch_copy;
+        $project->description = $request->detail;
+        $project->image_path = $request->image;
+        $project->production_time = $request->period;
+        $project->leader_name = $request->represent;
+        $project->team_name = $request->team;
+        $project->team_member = $request->member;
+        $project->genre = $request->genre;
+        $project->owner_id = $owner->id;
+        $project->save();
 
-        // $project = project::where('id', proid) -> get();
-        // $project->product_name = $request->title;
-        // $project->catchphrase = $request->catch_copy;
-        // $project->description = $request->detail;
-        // $project->image_path = $request->image;
-        // $project->production_time = $request->period;
-        // $project->leader_name = $request->represent;
-        // $project->team_name = $request->team;
-        // $project->team_member = $request->member;
-        // $project->genre = $request->genre;
-        // //$project->owner_id = $owner['id'];
-        // $project->save();
-
-        // return view('/completion');
+        return view('/completion', compact('project'));
     }
 
     public function destroy(int $id)
