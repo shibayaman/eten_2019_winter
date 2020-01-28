@@ -1,27 +1,23 @@
-  const fileName = document.querySelector('#file-selector .file-name');
-  const fileInput = document.querySelector('#file-selector input[type=file]');
+$(function() {
 
-    fileInput.onchange = () => {
-      if (fileInput.files.length > 0) {
-        fileName.textContent = fileInput.files[0].name;
-        $('#imagefield').hide();
-        $('#imagelabel').show();
-        $('#deletebutton').show();
-      }
-    }
-
-  $('#deletebutton').on('click', function(){
-    if (fileInput.files.length > 0) {
-      fileName.textContent = "選択されていません";
-      $('input[type=file]').val('');
-      $('#imagefield').show();
-      $('#imagelabel').hide();
-      $('#deletebutton').hide();
+  $('#file-selector input[type=file]').on('change', function () {
+    if ($(this).prop('files').length > 0) {
+      $('#file-name').text($(this).prop('files')[0].name);
+      $('#imagefield').hide();
+      $('#imagelabel').show();
+      $('#deletebutton').show();
     }
   });
 
-  $('#add_member').on('click', function() {
-    // memberID = `member${count}`;
+  $('#deletebutton').on('click', function(){
+    $('#file-name').text("選択されていません");
+    $('input[type=file]').val('');
+    $('#imagefield').show();
+    $('#imagelabel').hide();
+    $('#deletebutton').hide();
+  });
+
+  $('#add_member').on('click', function(){
     if(count < 10 && $(`#member${count}`).val() != ""){
       count++;
       $('#memberinput').append('<div class="field is-horizontal">'
@@ -156,3 +152,4 @@
 
     return submitflg;
   });
+});

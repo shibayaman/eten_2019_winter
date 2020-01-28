@@ -1,15 +1,13 @@
-const fileInput = document.querySelector('#file-selector input[type=file]');
-  fileInput.onchange = () => {
-    if (fileInput.files.length > 0) {
-      const fileName = document.querySelector('#file-selector .file-name');
-      fileName.textContent = fileInput.files[0].name;
+$(function() {
+  $('#file-selector input[type=file]').on('change', function(){
+    if ($(this).prop('files').length > 0) {
+      $('#file-name').text($(this).prop('files')[0].name);
     }
-  }
+  });
 
   var count = 0;
 
   $('#add_member').on('click', function() {
-    // memberID = `member${count}`;
     if(count <= 10 && $(`#member${count}`).val() != ""){
       count++;
       $('#memberinput').append('<div class="field is-horizontal">'
@@ -147,3 +145,4 @@ const fileInput = document.querySelector('#file-selector input[type=file]');
     }
     return submitflg;
   });
+});
