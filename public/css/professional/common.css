@@ -160,27 +160,6 @@ header {
     transition: .1s ease-in-out;
 }
 
-/* -------- 前へアイコン -------- */
-
-/* .pagination a:first-child::before {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 12px;
-    background: url(../../img/page_arrow.png) center left no-repeat;
-} */
-
-/*-------- 次へアイコン --------*/
-
-/* .pagination a:last-child::after {
-    content: "";
-    display: inline-block;
-    width: 20px;
-    height: 12px;
-    background: url(../../img/page_arrow.png) center left no-repeat;
-    transform: rotate(180deg);
-} */
-
 
 /*----------------------------------------------------
 スマホ表示

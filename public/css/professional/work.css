@@ -47,27 +47,28 @@ main {
 
 .work .work_img_table_wrap {
     display: flex;
+    align-items: center;
 }
 
 /*-------- 画像 --------*/
 
 .work_img img{
-    max-width: 480px;
+    max-width: 550px;
     margin-right: 30px;
 }
 
 /*-------- 詳細部分 右側 --------*/
 
 .work_ex {
-    width: 45%;
-    height: 250px;
+    width: 100%;
+    height: 310px;
 }
 
 /*-------- テーブル全体設定 --------*/
 
 table {
     font-size: 1.6rem;
-    letter-spacing: .05rem;
+    letter-spacing: .1rem;
     line-height: 1.8;
 }
 
@@ -117,11 +118,7 @@ table .work_course_name {
 /*-------- ページ移動 戻る --------*/
 
 .pagination .return {
-    box-shadow: none;
-    border-radius: 0;
-    padding-bottom: 10px;
-    margin: 0 20px;
-    border-bottom: solid 1px #9D9D9D;
+    cursor: pointer;
 }
 .pagination .return:hover {
     opacity: .4;
@@ -151,20 +148,19 @@ table .work_course_name {
     #main {
         margin-top: 120px;
     }
-
     .work .work_name {
         margin-bottom: 10px;
     }
-    .work .work_img_table_wrap {
-        flex-wrap: nowrap;
-    }
     .work_img img{
-        width: 320px;
+        max-width: 100%;
         margin-right: 20px;
     }
     .work_ex {
-        margin-top: 0;
+        margin-top: 10px;
         height: 180px;
+    }
+    .work_ex th,.work_ex td {
+        padding: 10px 0;
     }
     .work_comment th {
         margin-bottom: 0;
@@ -182,11 +178,5 @@ table .work_course_name {
     .work_img img{
         width: 100%;
         margin-right: 0;
-    }
-    .work_ex {
-        margin-top: 10px;
-    }
-    .work_ex th,.work_ex td {
-        padding: 8px 0;
     }
 }
