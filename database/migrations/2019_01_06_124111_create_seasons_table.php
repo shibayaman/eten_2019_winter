@@ -16,7 +16,7 @@ class CreateSeasonsTable extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->tinyIncrements('id');
             $table->unsignedInteger('year');
-            $table->string('season',10);
+            $table->string('season', 10);
         });
     }
 

@@ -40,11 +40,13 @@ class AuthLoginController extends Controller
         $this->middleware('notOwner')->only('login');
     }
 
-    public function username() {
+    public function username()
+    {
         return 'username';
     }
 
-    public function showLoginForm() {
+    public function showLoginForm()
+    {
         return view('admin.auth.login');
     }
 

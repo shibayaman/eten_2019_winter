@@ -16,15 +16,18 @@ class Owner extends Authenticatable
         'password',
     ];
 
-    public function project() {
+    public function project()
+    {
         return $this->hasOne('App\Project');
     }
 
-    public function season(){
+    public function season()
+    {
         return $this->belongsTo('App\Season');
     }
 
-    public function class(){
+    public function class()
+    {
         return $this->belongsTo(Classes::class, 'class_id');
     }
 

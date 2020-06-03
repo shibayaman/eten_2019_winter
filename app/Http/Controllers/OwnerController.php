@@ -12,18 +12,19 @@ use Str;
 
 class OwnerController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth:admin');
     }
 
     public function index(Request $request)
     {
-        if($request->has('field')) {
+        if ($request->has('field')) {
             $field = $request->query('field');
             $validFields = Config::get('const.fields');
 
-            if(in_array($field, $validFields)) {
-                $owners = Owner::whereIn('class_id', function($query) use ($field) {
+            if (in_array($field, $validFields)) {
+                $owners = Owner::whereIn('class_id', function ($query) use ($field) {
                     $query->from('classes')
                         ->select('classes.id')
                         ->where('classes.field', $field);
@@ -57,27 +58,27 @@ class OwnerController extends Controller
 
         $class = Classes::find($input['class_id']);
         $fields = Config::get('const.fields');
-        if($class->field === $fields['IT']) {
+        if ($class->field === $fields['IT']) {
             $prefix = 'I';
-        } else if ($class->field === $fields['WEB']) {
+        } elseif ($class->field === $fields['WEB']) {
             $prefix = 'W';
         } else {
             $prefix = 'G';
         }
 
-        $projectCodes = array_map(function($projectCode) use($prefix) {
+        $projectCodes = array_map(function ($projectCode) use ($prefix) {
             return $prefix . $projectCode;
         }, $input['project_code']);
 
         
         $duplicatedCodes = Owner::whereIn('project_code', $projectCodes)->pluck('project_code')->all();
-        if(count($duplicatedCodes)) {
-            return back()->withErrors(array_map(function($code) {
+        if (count($duplicatedCodes)) {
+            return back()->withErrors(array_map(function ($code) {
                 return $code . 'は既に存在します';
             }, $duplicatedCodes))->withInput();
         }
 
-        $owners = array_map(function($projectCode) use($input) {
+        $owners = array_map(function ($projectCode) use ($input) {
             return [
                 'project_code' => $projectCode,
                 'password' => Str::random(16),

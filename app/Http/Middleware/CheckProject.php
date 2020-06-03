@@ -19,7 +19,7 @@ class CheckProject
     {
         $owner = Auth::id();
         
-        if(Project::where('owner_id', $owner)->exists()){
+        if (Project::where('owner_id', $owner)->exists()) {
             return redirect(route('projects.edit'));
         }
 

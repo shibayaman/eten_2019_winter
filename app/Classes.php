@@ -11,7 +11,8 @@ class Classes extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    public function owner() {
+    public function owner()
+    {
         return $this->hasMany('App\Owner');
     }
 }

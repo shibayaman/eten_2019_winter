@@ -9,7 +9,6 @@ use Config;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-
 class LoginController extends Controller
 {
     /*
@@ -43,7 +42,8 @@ class LoginController extends Controller
         $this->middleware('notAdmin')->only('login');
     }
 
-    public function username() {
+    public function username()
+    {
         return 'project_code';
     }
 

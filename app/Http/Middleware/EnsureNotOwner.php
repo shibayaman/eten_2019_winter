@@ -16,7 +16,7 @@ class EnsureNotOwner
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::guard('user')->check()) {
+        if (Auth::guard('user')->check()) {
             Auth::guard('user')->logout();
         }
         return $next($request);

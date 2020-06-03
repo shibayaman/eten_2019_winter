@@ -8,7 +8,8 @@ class Season extends Model
 {
     public $timestamps = false;
 
-    public function season() {
+    public function season()
+    {
         return $this->hasMany('App\Owner');
     }
 }

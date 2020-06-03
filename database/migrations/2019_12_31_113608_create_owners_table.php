@@ -18,7 +18,7 @@ class CreateOwnersTable extends Migration
             $table->string('password', 64)->unique();
             $table->string('project_code', 20);
             $table->unsignedTinyInteger('season_id');
-            $table->string('class_id',10);
+            $table->string('class_id', 10);
             $table->timestamp('expires_at');
             $table->unique(['project_code', 'season_id']);
             $table->timestamps();

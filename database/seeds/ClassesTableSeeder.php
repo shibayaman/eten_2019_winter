@@ -191,6 +191,5 @@ class ClassesTableSeeder extends Seeder
             'graduation_year' => '20',
             'grade' => '3',
         ]);
-
     }
 }

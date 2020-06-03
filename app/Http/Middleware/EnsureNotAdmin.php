@@ -16,7 +16,7 @@ class EnsureNotAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::guard('admin')->check()) {
+        if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
         }
         return $next($request);

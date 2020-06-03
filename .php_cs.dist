@@ -1,0 +1,24 @@
+<?php
+
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
+    ->in([
+        __DIR__ . '/app',
+        __DIR__ . '/config',
+        __DIR__ . '/database',
+        __DIR__ . '/resources',
+        __DIR__ . '/routes',
+        __DIR__ . '/tests',
+    ])
+    ->name('*.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
+
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@PSR2' => true,
+    ])
+    ->setUsingCache(false)
+    ->setFinder($finder);

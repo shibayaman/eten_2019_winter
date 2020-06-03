@@ -22,7 +22,7 @@ Auth::routes([
     'reset' => false
 ]);
 
-Route::prefix('admin')->group(function() {
+Route::prefix('admin')->group(function () {
     Route::get('/login', 'Admin\AuthLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Admin\AuthLoginController@login');
     Route::post('logout', 'Admin\AuthLoginController@logout')->name('admin.logout');

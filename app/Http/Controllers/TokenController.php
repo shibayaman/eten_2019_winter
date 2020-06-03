@@ -10,7 +10,8 @@ use Illuminate\Support\Str;
 
 class TokenController extends Controller
 {
-    public function __constructor() {
+    public function __constructor()
+    {
         $this->middleware('auth');
     }
 

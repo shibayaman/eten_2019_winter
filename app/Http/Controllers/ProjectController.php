@@ -15,7 +15,8 @@ use Str;
 
 class ProjectController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth')->except([
             'index', 'show'
         ]);
@@ -32,7 +33,7 @@ class ProjectController extends Controller
         $fields = Config::get('const.fields');
         $field = $request->query('field');
 
-        if(!in_array($field, $fields)) {
+        if (!in_array($field, $fields)) {
             $field = $fields['IT'];
         }
 
@@ -42,11 +43,11 @@ class ProjectController extends Controller
         $graduation_year = array(20, 21, 22, 23);
         $grade = array(1, 2, 3, 4);
 
-        if($request->has('filter')){
-            if(in_array($request->query('filter'), $graduation_year)){
+        if ($request->has('filter')) {
+            if (in_array($request->query('filter'), $graduation_year)) {
                 $conditions['classes.graduation_year'] = $request->query('filter');
             }
-            if(in_array($request->query('filter'), $grade)){
+            if (in_array($request->query('filter'), $grade)) {
                 $conditions['classes.grade'] = $request->query('filter');
             }
         }
@@ -58,24 +59,25 @@ class ProjectController extends Controller
         ->orderBy('owners.project_code')
         ->paginate(9);
 
-        return view('index', compact('field', 'fields','projects'));
+        return view('index', compact('field', 'fields', 'projects'));
     }
 
     public function create()
     {
         $owner = Auth::user()->only('project_code', 'class_id');
         $class = Auth::user()->class->field;
-        return view('registration',compact('owner','class'));
+        return view('registration', compact('owner', 'class'));
     }
 
-    public function confirm(Request $request) {
+    public function confirm(Request $request)
+    {
         $request->validate([
             'image' => 'nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $oldProject = Auth::user()->project;
 
-        if(isset($request->image)) {
+        if (isset($request->image)) {
             $image = $request->file('image');
             $extension = $image->getClientOriginalExtension();
 
@@ -85,7 +87,7 @@ class ProjectController extends Controller
             $imagePath = Str::random(40) . '.' . $extension;
             Image::make($image)->fit($width, $height)->save(storage_path('app/public/image/' . $imagePath));
         } else {
-            if($oldProject) {
+            if ($oldProject) {
                 $imagePath = $oldProject->image_path;
             } else {
                 $imagePath = null;
@@ -97,16 +99,16 @@ class ProjectController extends Controller
 
         $submitTo = route('projects.store');
 
-        if($oldProject) {
+        if ($oldProject) {
             $submitTo = route('projects.update');
         }
 
-        return view('confirm',compact('project','imagePath','submitTo'));
+        return view('confirm', compact('project', 'imagePath', 'submitTo'));
     }
 
     public function store(Request $request)
     {
-        if(Auth::user()->project()->exists()){
+        if (Auth::user()->project()->exists()) {
             return redirect()->route('projects.edit');
         }
 
@@ -152,7 +154,7 @@ class ProjectController extends Controller
 
     //FIXME: 確認画面から戻ってきた時画像変わってない
     public function edit()
-    {      
+    {
         $fields = Config::get('const.fields');
         $owner = Auth::user();
         $time = $owner->project->production_time;
@@ -160,17 +162,17 @@ class ProjectController extends Controller
         $member = $owner->project->team_member;
         $member_array = explode(",", $member);
 
-        $member_array = array_filter($member_array, function($value){
-          return trim($value);
+        $member_array = array_filter($member_array, function ($value) {
+            return trim($value);
         });
         $registered_genre = [$owner->project->genre];
 
-        if($owner->class->field === $fields["IT"]){
-          $genre_array = ["モバイルアプリ", "PCアプリケーション", "Webアプリケーション"];
-        }elseif ($owner->class->field === $fields["WEB"]) {
-          $genre_array = ["Webサイト", "Webアプリケーション"];
-        }elseif ($owner->class->field === $fields["GRAPHIC"]) {
-          $genre_array = ["グラフィック"];
+        if ($owner->class->field === $fields["IT"]) {
+            $genre_array = ["モバイルアプリ", "PCアプリケーション", "Webアプリケーション"];
+        } elseif ($owner->class->field === $fields["WEB"]) {
+            $genre_array = ["Webサイト", "Webアプリケーション"];
+        } elseif ($owner->class->field === $fields["GRAPHIC"]) {
+            $genre_array = ["グラフィック"];
         }
 
         $result_genres = array_merge($registered_genre, $genre_array);
